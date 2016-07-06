@@ -1,0 +1,63 @@
+<html>
+<head>
+	<title>Chennai</title>
+	<style>
+	body{
+		background-color:black;
+		}
+p{
+  color: lime; 
+  font-family: "Courier";
+  font-size: 20px;
+  margin: 10px 0 0 10px;
+  position:relative;
+  top:200px;
+  left:50%;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 30em;
+  animation: type 4s steps(60, end); 
+}
+
+p:nth-child(5){
+  animation: type2 8s steps(60, end);
+}
+
+p a{
+  color: lime;
+  text-decoration: none;
+}
+
+span{
+  animation: blink 1s infinite;
+}
+
+@keyframes type{ 
+  from { width: 0; } 
+} 
+
+@keyframes type2{
+  0%{width: 0;}
+  50%{width: 0;}
+  100%{ width: 100; } 
+} 
+
+@keyframes blink{
+  to{opacity: .0;}
+}
+
+::selection{
+  background: black;
+}
+</style>
+</head>
+<body>
+<p>One City That is known to have</p>
+<p>->Leading Bus terminal</p>
+<p>->largest Library in Asia </p>
+<p>->largest public zoo in the country and lot more..</p>
+<p style='background-color:white;text-color:black'>
+  <a href='chennai.html'>Click to explore the Metro city</a><span>|</span></p>  
+
+</body>
+</html>

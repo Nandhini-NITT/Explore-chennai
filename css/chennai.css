@@ -1,0 +1,34 @@
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
+  
+  #myCarousel{
+	width:50%;
+	position:relative;
+	left:25%;
+	}
+#myCarousel img{
+position:relative;
+}
+body{
+background-color:black;
+}
+.carousel-caption {
+    position: absolute;
+    z-index: 2;
+    display:table;
+    width:100%;
+    height:100%;
+}
+.carousel-caption h3{
+	color:black;
+	}
+.absolute-div {
+    position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+}
