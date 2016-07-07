@@ -11,7 +11,7 @@ function getLocation() {
 	var marker = L.marker([lat, lng]).addTo(map);
 	marker.bindPopup("<b>Your location</b><br>Click to find places near you").openPopup();
 	function onMapClick(e) {
-    window.location="viewPlace.html";
+    window.location="viewPlace.html?lat="+lat+"&lng="+lng;
 }
 	marker.on('click', onMapClick);
     });
