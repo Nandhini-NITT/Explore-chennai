@@ -15,6 +15,12 @@ position:relative;
 body{
 background-color:bisque;
 }
+
+#map-holder{
+position:fixed;
+left:300px;
+top:45%;
+}
 .carousel-caption {
     position: absolute;
     z-index: 2;
@@ -40,7 +46,7 @@ background-color:bisque;
 }
 
 #category{
-background-color:wood;
+background-color:burlywood;
 border-radius:10rem;
 width:10rem;
 height:10rem;

@@ -2,13 +2,15 @@
 <head>
 	<title>Chennai</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src='chennai-home.js'></script>
+  <script src='scripts/chennai-home.js'></script>
 	<link rel='stylesheet' type='text/css' href='css\chennai.css'>
 </head>
-<body>
+<body onload='getLocation();'>
 	<div class="container">
   <br>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -154,21 +156,25 @@
 </div>
 <div class='menu'>
 <ul>
-	<li id='category'><a href='viewCategory.html'>Arts and Entertainment</a></li>
-	<li id='category'><a href='viewCategory.html'>College and University</a></li>
-	<li id='category' style='padding-top:4rem'><a href='viewCategory.html'>Events</a></li>
-	<li id='category' style='padding-top:4rem'><a href='viewCategory.html'>Food</a></li>
-	<li id='category' style='padding-top:4rem'><a href='viewCategory.html'>Night Life Spot</a></li>
+	<li id='category'><a href='viewCategory.html?categoryId=4d4b7104d754a06370d81259'>Arts and Entertainment</a></li>
+	<li id='category'><a href='viewCategory.html?categoryId=4d4b7105d754a06372d81259'>College and University</a></li>
+	<li id='category' style='padding-top:4rem'><a href='viewCategory.html?categoryId=4d4b7105d754a06373d81259'>Events</a></li>
+	<li id='category' style='padding-top:4rem'><a href='viewCategory.html?categoryId=4d4b7105d754a06374d81259'>Food</a></li>
+	<li id='category' style='padding-top:4rem'><a href='viewCategory.html?categoryId=4d4b7105d754a06376d81259'>Night Life Spot</a></li>
 </ul>
 </div>
 <div class='right-menu'>
 <ul>
-	<li id='category'><a href='viewCategory.html'>Outdoor and Recreation</a></li>
-	<li id='category' style='padding-top:2rem'><a href='viewCategory.html'>Professional and other places</a></li>
-	<li id='category' style='padding-top:4rem'><a href='viewCategory.html'>Residence</a></li>
-	<li id='category'><a href='viewCategory.html'>Shops and Services</a></li>
-	<li id='category'><a href='viewCategory.html'>Travel and Transport</a></li>
+	<li id='category'><a href='viewCategory.html?categoryId=4d4b7105d754a06377d81259'>Outdoors and Recreation</a></li>
+	<li id='category' style='padding-top:2rem'><a href='viewCategory.html?categoryId=4d4b7105d754a06375d81259'>Professional and other places</a></li>
+	<li id='category' style='padding-top:4rem'><a href='viewCategory.html?categoryId=4e67e38e036454776db1fb3a'>Residence</a></li>
+	<li id='category'><a href='viewCategory.html?categoryId=4d4b7105d754a06378d81259'>Shops and Services</a></li>
+	<li id='category'><a href='viewCategory.html?categoryId=4d4b7105d754a06379d81259'>Travel and Transport</a></li>
 <ul>
+</div>
+<div id='map-holder'>
+
+<div id='map' style='height:380px;width:500px;position:relative;left:100px;'></div>
 </div>
 </body>
 	
