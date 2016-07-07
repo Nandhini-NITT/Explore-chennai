@@ -1,4 +1,18 @@
-
+function sortOn () {
+    var t;
+	for(var i=0;i<oData.response.venues.length;i++)
+	{
+		for(var j=i+1;j<oData.response.venues.length;j++)
+		{
+			if(oData.response.venues[j].name.localeCompare(oData.response.venues[i].name)==-1)
+			{
+				t=oData.response.venues[j];
+				oData.response.venues[j]=oData.response.venues[i];
+				oData.response.venues[i]=t;
+			}
+		}
+	}
+}
 		var url=window.location.search.substring(1);;
 	var client_id='10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
 	var client_secret='T4YM5HKKRQCM1T1KQJPBMHDGPVTVBA1N3ID3NMCHIYNQDI2Q';
@@ -9,7 +23,7 @@
 		$.ajax(surl,{
 			complete:function(p_oXHR,p_sStatus){
 					oData=$.parseJSON(p_oXHR.responseText);
-					console.log(oData);
+					sortOn();
 					for(var i=0;i<oData.response.venues.length;i++)
 					{
 						id=oData.response.venues[i].id;
