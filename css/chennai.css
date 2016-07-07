@@ -15,6 +15,20 @@ position:relative;
 body{
 background-color:bisque;
 }
+.mapboxgl-canvas{
+position:relative !important;
+width:700px !important;
+left:300px;
+}
+.mapboxgl-map{
+width:700px !important;
+left:150px;
+
+}
+#map-holder{
+position:absolute;
+top:55%;
+}
 .carousel-caption {
     position: absolute;
     z-index: 2;
