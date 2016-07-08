@@ -13,7 +13,7 @@ function changeRadius()
 	
 	map.removeLayer(circle);
 	var radius=document.getElementById("radius").value;
-	$('#radius').remove();
+	$('#getradius').remove();
 	showResults(radius);
 }
 function showResults(radius)
@@ -24,12 +24,6 @@ function showResults(radius)
 	var lng=getParameterByName('lng');
 	var latlng=lat+','+lng;
 	L.mapbox.accessToken = 'pk.eyJ1IjoibmFuZGhpbmlkZXZpIiwiYSI6ImNpcWJ1bGQ1dTAwd21mbG0xZmg4bmZ2M3YifQ.RbOoXPJutCitMrH-tp6H7Q';
-	if (typeof radius === 'undefined')
-	{
-		map = L.mapbox.map('map', 'mapbox.streets')
-		.setView([lat, lng], 12);
-		marker = L.marker([lat, lng]).addTo(map);
-	}
 	var client_id='10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
 	var client_secret='T4YM5HKKRQCM1T1KQJPBMHDGPVTVBA1N3ID3NMCHIYNQDI2Q';
 	$('#showResults tbody').empty();
@@ -39,7 +33,15 @@ function showResults(radius)
 		offset=0;
 	else if(page<no_of_pages)
 		offset=page*10;
-	url='https://api.foursquare.com/v2/venues/explore?ll='+latlng+'&viewPhotos=1&v=20140806&limit=10&offset='+offset+'&client_id='+client_id+'&client_secret='+client_secret;
+	if (typeof radius === 'undefined')
+	{
+		map = L.mapbox.map('map', 'mapbox.streets')
+		.setView([lat, lng], 12);
+		marker = L.marker([lat, lng]).addTo(map);
+		url='https://api.foursquare.com/v2/venues/explore?ll='+latlng+'&viewPhotos=1&v=20140806&limit=10&offset='+offset+'&client_id='+client_id+'&client_secret='+client_secret;
+	}
+	else
+		url='https://api.foursquare.com/v2/venues/explore?ll='+latlng+'&viewPhotos=1&v=20140806&limit=10&offset='+offset+'&radius='+radius+'&client_id='+client_id+'&client_secret='+client_secret;
 	$.ajax(url,{
 			complete:function(xHTTP,status){
 			oData=$.parseJSON(xHTTP.responseText);
