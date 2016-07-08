@@ -46,7 +46,6 @@ function showResults(radius)
 	$.ajax(url,{
 			complete:function(xHTTP,status){
 			oData=$.parseJSON(xHTTP.responseText);
-			console.log(oData);
 			document.getElementById('radius').value=oData.response.suggestedRadius;
 			if (typeof radius === 'undefined') { radius = oData.response.suggestedRadius; }
 			

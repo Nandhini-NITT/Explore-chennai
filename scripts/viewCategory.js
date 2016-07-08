@@ -12,7 +12,7 @@ function addRowHandlers()
 	{
 		rows[i].onclick = function(){ return function(){
 		var id = this.cells[1].innerHTML;
-		alert(id);
+		window.location='viewVenue.html?id='+id;
 		};
 		}(rows[i]);
 	}
