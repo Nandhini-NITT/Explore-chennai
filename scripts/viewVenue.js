@@ -1,6 +1,6 @@
 var client_id='10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
 	var client_secret='T4YM5HKKRQCM1T1KQJPBMHDGPVTVBA1N3ID3NMCHIYNQDI2Q';
-		function getParameterByName(name, url) {
+	function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -14,6 +14,7 @@ var client_id='10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
 	var url='https://api.foursquare.com/v2/venues/'+id+'?v=20140806&client_id='+client_id+'&client_secret='+client_secret;
 	$.ajax(url,{
 				complete:function(xHTTP,status){
+						
 						oData=$.parseJSON(xHTTP.responseText);
 						console.log(oData);
 						var flag=0;
@@ -21,11 +22,20 @@ var client_id='10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
 						if(oData.response.venue.photos.count==0)
 							$('#pics').append('<img src="Images/Not available.png">');
 						else
-						for(var i=0;i<oData.response.venue.photos.groups[0].items.length;i++)
+							for(var i=0;i<oData.response.venue.photos.groups[0].items.length;i++)
 						{
 							flag=1;
 							var img=oData.response.venue.photos.groups[0].items[i].prefix+'width500'+oData.response.venue.photos.groups[0].items[i].suffix;
-							$('#pics').append('<img src="'+img+'">');
+							if(i==0)
+								{
+								$('.carousel-inner').append('<div class="item active"><img src="'+img+'"></div>');
+								$('.carousel-indicators').append('<li data-target="#myCarousel" data-slide-to="'+i+'" class="active"></li>');
+								}
+							else
+								{
+								$('.carousel-inner').append('<div class="item"><img src="'+img+'"></div>');
+								$('.carousel-indicators').append('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>');
+								}
 						}
 						$('#category').text(oData.response.venue.categories[0].name);
 						$('#categoryIcon').html('<img src="'+oData.response.venue.categories[0].icon.prefix+'bg_44'+oData.response.venue.categories[0].icon.suffix+'">');
