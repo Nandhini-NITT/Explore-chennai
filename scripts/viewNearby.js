@@ -1,4 +1,4 @@
-var no_of_pages,page=0;
+var no_of_pages,page=0,circle,map,marker;
 	function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -8,17 +8,33 @@ var no_of_pages,page=0;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-	
-function showResults()
+function changeRadius()
 {
+	
+	map.removeLayer(circle);
+	var radius=document.getElementById("radius").value;
+	$('#radius').remove();
+	showResults(radius);
+}
+function showResults(radius)
+{
+	
 	var offset;
 	var lat=getParameterByName('lat');
 	var lng=getParameterByName('lng');
 	var latlng=lat+','+lng;
+	L.mapbox.accessToken = 'pk.eyJ1IjoibmFuZGhpbmlkZXZpIiwiYSI6ImNpcWJ1bGQ1dTAwd21mbG0xZmg4bmZ2M3YifQ.RbOoXPJutCitMrH-tp6H7Q';
+	if (typeof radius === 'undefined')
+	{
+		map = L.mapbox.map('map', 'mapbox.streets')
+		.setView([lat, lng], 12);
+		marker = L.marker([lat, lng]).addTo(map);
+	}
 	var client_id='10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
 	var client_secret='T4YM5HKKRQCM1T1KQJPBMHDGPVTVBA1N3ID3NMCHIYNQDI2Q';
 	$('#showResults tbody').empty();
 	$('#page-results ul').empty();
+	$('#page-results').append('<span id="getradius">Radius of search <input type="number" id="radius" placeholder="Radius of search"><button onClick="changeRadius()">Submit</button></span>');
 	if(page==0)
 		offset=0;
 	else if(page<no_of_pages)
@@ -26,8 +42,18 @@ function showResults()
 	url='https://api.foursquare.com/v2/venues/explore?ll='+latlng+'&viewPhotos=1&v=20140806&limit=10&offset='+offset+'&client_id='+client_id+'&client_secret='+client_secret;
 	$.ajax(url,{
 			complete:function(xHTTP,status){
-			var oData=$.parseJSON(xHTTP.responseText);
+			oData=$.parseJSON(xHTTP.responseText);
 			console.log(oData);
+			document.getElementById('radius').value=oData.response.suggestedRadius;
+			if (typeof radius === 'undefined') { radius = oData.response.suggestedRadius; }
+			L.mapbox.accessToken = 'pk.eyJ1IjoibmFuZGhpbmlkZXZpIiwiYSI6ImNpcWJ1bGQ1dTAwd21mbG0xZmg4bmZ2M3YifQ.RbOoXPJutCitMrH-tp6H7Q';
+			circle = L.circle([lat,lng], radius, {
+			color: 'red',
+			fillColor: '#f03',
+			fillOpacity: 0.5
+			});
+			map.addLayer(circle);
+			console.log(circle);
 			no_of_pages=Math.floor(oData.response.totalResults/10)+1;
 			if(page<=no_of_pages)
 			{

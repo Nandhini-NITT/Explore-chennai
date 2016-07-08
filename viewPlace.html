@@ -1,12 +1,15 @@
 <html>
 <head>
 	<title>Find all places near you</title>
+	<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+	<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src='scripts/viewNearby.js'></script>
 </head>
 <body onload='showResults();'>
+
 <div id='page-results'>
 	<table id='showResults'>
 		<thead>
@@ -17,6 +20,8 @@
 		<tbody>
 		</tbody>
 	</table>
+</div>
+<div id='map' style='height:380px'>
 </div>
 </body>
 </html>
