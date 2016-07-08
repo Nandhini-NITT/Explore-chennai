@@ -22,16 +22,15 @@ function showResults()
 	if(page==0)
 		offset=0;
 	else if(page<no_of_pages)
-		offset=page*30;
-	url='https://api.foursquare.com/v2/venues/explore?ll='+latlng+'&viewPhotos=1&v=20140806&limit=30&offset='+offset+'&client_id='+client_id+'&client_secret='+client_secret;
+		offset=page*10;
+	url='https://api.foursquare.com/v2/venues/explore?ll='+latlng+'&viewPhotos=1&v=20140806&limit=10&offset='+offset+'&client_id='+client_id+'&client_secret='+client_secret;
 	$.ajax(url,{
 			complete:function(xHTTP,status){
 			var oData=$.parseJSON(xHTTP.responseText);
 			console.log(oData);
-			no_of_pages=Math.floor(oData.response.totalResults/30)+1;
+			no_of_pages=Math.floor(oData.response.totalResults/10)+1;
 			if(page<=no_of_pages)
 			{
-				alert(oData.response.groups[0].items.length);
 				for(var i=0;i<oData.response.groups[0].items.length;i++)
 				{
 					var tip='tips';
