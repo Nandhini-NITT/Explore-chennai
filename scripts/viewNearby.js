@@ -41,11 +41,11 @@ function showResults()
 					$('#showResults tbody').append('<tr><td><img src="'+img+'" width=100></td><td>'+oData.response.groups[0].items[i].venue.name+'</td><td>'+oData.response.groups[0].items[i].venue.categories[0].name+'</td></tr>');
 				}
 				if(page>0 && page<no_of_pages-1)
-					$('#page-results').append("<ul id='movePage' class='pager'><li><a href='#' onClick='PageBack();return false;'>Previous</a></li><li><a href='#'onClick='PageAdd();return false;'>Next</a></li></ul>");
+					$('#page-results').append("<ul id='movePage' class='pager'><li><a href='#' onClick='PageBack();return false;'>Previous</a></li><li><a href='#'onClick='PageAdd();return false;'>Next</a></li><li>Page number "+(page+1)+"/"+no_of_pages+"</li></ul>");
 				else if(page==0)
-					$('#page-results').append('<ul id="movePage" class="pager"><li><a href="#" onClick="PageAdd();return false;">Next</a></li></ul>');
+					$('#page-results').append('<ul id="movePage" class="pager"><li><a href="#" onClick="PageAdd();return false;">Next</a></li><li>Page number '+(page+1)+'/'+no_of_pages+'</li></ul>');
 				else
-					$('#page-results').append("<ul id='movePage' class='pager'><li><a href='#' onClick='PageBack();return false;'>Previous</a></li>");
+					$('#page-results').append("<ul id='movePage' class='pager'><li><a href='#' onClick='PageBack();return false;'>Previous</a></li><li>Page number "+(page+1)+"/"+no_of_pages+"</li>");
 			}
 		}
 			});
