@@ -8,6 +8,25 @@ var no_of_pages,page=0,circle,map,marker;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+function addRowHandlers() 
+{
+	var rows;
+	rows= document.getElementById("showResults").rows;
+	for (var i = 0; i < rows.length; i++) 
+	{
+		rows[i].style.cursor = "pointer";
+        rows[i].onmousemove = function () { this.style.backgroundColor = "#ffad60"; this.style.color = "#FFFFFF"; };
+        rows[i].onmouseout = function () { this.style.backgroundColor = ""; this.style.color = ""; };
+	}
+	for (i = 0; i < rows.length; i++) 
+	{
+		rows[i].onclick = function(){ return function(){
+		var id = this.cells[3].innerHTML;
+		window.location='viewVenue.html?id='+id;
+		};
+		}(rows[i]);
+	}
+}
 function changeRadius()
 {
 	
@@ -18,7 +37,6 @@ function changeRadius()
 }
 function showResults(radius)
 {
-	
 	var offset;
 	var lat=getParameterByName('lat');
 	var lng=getParameterByName('lng');
@@ -55,7 +73,7 @@ function showResults(radius)
 			fillOpacity: 0.5
 			});
 			map.addLayer(circle);
-			console.log(circle);
+			console.log(oData);
 			no_of_pages=Math.floor(oData.response.totalResults/10)+1;
 			if(page<=no_of_pages)
 			{
@@ -66,8 +84,9 @@ function showResults(radius)
 						var img=oData.response.groups[0].items[i].tips[0].photourl;
 					if(img==undefined)
 						img='Images/Not available.png';
-					$('#showResults tbody').append('<tr><td><img src="'+img+'" width=100></td><td>'+oData.response.groups[0].items[i].venue.name+'</td><td>'+oData.response.groups[0].items[i].venue.categories[0].name+'</td></tr>');
+					$('#showResults tbody').append('<tr><td><img src="'+img+'" width=100></td><td>'+oData.response.groups[0].items[i].venue.name+'</td><td>'+oData.response.groups[0].items[i].venue.categories[0].name+'</td><td style="display:none">'+oData.response.groups[0].items[i].venue.id+'</td></tr>');
 				}
+				addRowHandlers();
 				if(page>0 && page<no_of_pages-1)
 					$('#page-results').append("<ul id='movePage' class='pager'><li><a href='#' onClick='PageBack();return false;'>Previous</a></li><li><a href='#'onClick='PageAdd();return false;'>Next</a></li><li>Page number "+(page+1)+"/"+no_of_pages+"</li></ul>");
 				else if(page==0)
