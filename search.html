@@ -1,0 +1,37 @@
+<html>
+<head>
+	<title>Search all places</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<input type='text' id='query' onkeyup='search_suggest();'>
+	<div id='suggest'></div>
+	<script>
+		function search_suggest()
+		{
+			var client_id='10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
+			var client_secret='T4YM5HKKRQCM1T1KQJPBMHDGPVTVBA1N3ID3NMCHIYNQDI2Q';
+			var query=$('#query').val();
+			$('#suggest').empty();
+			if(query.length>=3)
+			{
+				url='https://api.foursquare.com/v2/venues/suggestcompletion?near=chennai&query='+query+'&v=20140806&client_id='+client_id+'&client_secret='+client_secret;
+				$.ajax(url,{
+						complete:function(xHTTP,status){
+								oData=$.parseJSON(xHTTP.responseText);
+								console.log(oData);
+								for(var i=0;i<5;i++)
+								{
+									if("address" in oData.response.minivenues[i].location)
+										$('#suggest').append('<li>'+oData.response.minivenues[i].name+', Location:'+oData.response.minivenues[i].location.address+'</li>');
+									else
+										$('#suggest').append('<li>'+oData.response.minivenues[i].name+'</li>');
+								}
+								}
+						});
+			}
+		}
+	</script>
+</body>

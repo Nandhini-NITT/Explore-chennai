@@ -35,8 +35,9 @@ function showResults(radius)
 		offset=page*10;
 	if (typeof radius === 'undefined')
 	{
+		L.mapbox.accessToken = 'pk.eyJ1IjoibmFuZGhpbmlkZXZpIiwiYSI6ImNpcWJ1bGQ1dTAwd21mbG0xZmg4bmZ2M3YifQ.RbOoXPJutCitMrH-tp6H7Q';
 		map = L.mapbox.map('map', 'mapbox.streets')
-		.setView([lat, lng], 12);
+		.setView([13.0827, 80.2707], 12);
 		marker = L.marker([lat, lng]).addTo(map);
 		url='https://api.foursquare.com/v2/venues/explore?ll='+latlng+'&viewPhotos=1&v=20140806&limit=10&offset='+offset+'&client_id='+client_id+'&client_secret='+client_secret;
 	}
@@ -48,7 +49,7 @@ function showResults(radius)
 			console.log(oData);
 			document.getElementById('radius').value=oData.response.suggestedRadius;
 			if (typeof radius === 'undefined') { radius = oData.response.suggestedRadius; }
-			L.mapbox.accessToken = 'pk.eyJ1IjoibmFuZGhpbmlkZXZpIiwiYSI6ImNpcWJ1bGQ1dTAwd21mbG0xZmg4bmZ2M3YifQ.RbOoXPJutCitMrH-tp6H7Q';
+			
 			circle = L.circle([lat,lng], radius, {
 			color: 'red',
 			fillColor: '#f03',
