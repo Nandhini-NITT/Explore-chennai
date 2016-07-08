@@ -1,3 +1,22 @@
+function addRowHandlers() 
+{
+	var rows;
+	rows= document.getElementById("showResults").rows;
+	for (var i = 0; i < rows.length; i++) 
+	{
+		rows[i].style.cursor = "pointer";
+        rows[i].onmousemove = function () { this.style.backgroundColor = "#ffad60"; this.style.color = "#FFFFFF"; };
+        rows[i].onmouseout = function () { this.style.backgroundColor = ""; this.style.color = ""; };
+	}
+	for (i = 0; i < rows.length; i++) 
+	{
+		rows[i].onclick = function(){ return function(){
+		var id = this.cells[1].innerHTML;
+		alert(id);
+		};
+		}(rows[i]);
+	}
+}
 function sortOn () {
     var t;
 	for(var i=0;i<oData.response.venues.length;i++)
@@ -46,6 +65,8 @@ function sortOn () {
 	{
 		totalResults=oData.response.venues.length;
 		count=totalResults-startindex-1;
+		if($('#showResults tbody').count==10)
+			addRowHandlers();
 		if(startindex<50)
 		{
 		for(var i=startindex;i<startindex+10;i++)
@@ -79,7 +100,8 @@ function sortOn () {
 								img=imageData.response.photos.items[0].prefix+'width100'+imageData.response.photos.items[0].suffix;
 							else
 								img='Images/Not available.png';
-							$('#showResults tbody').append('<tr><td><img src="'+img+'"></td><td>'+id+'</td><td>'+name+'</td></tr>');
+							$('#showResults > tbody').append('<tr><td><img src="'+img+'"></td><td>'+id+'</td><td>'+name+'</td></tr>');
+							addRowHandlers();
 						}
 						});
 	}
