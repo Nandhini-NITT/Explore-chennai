@@ -7,7 +7,7 @@ function getLocation() {
   lng=position.coords.longitude;
   	L.mapbox.accessToken = 'pk.eyJ1IjoibmFuZGhpbmlkZXZpIiwiYSI6ImNpcWJ1bGQ1dTAwd21mbG0xZmg4bmZ2M3YifQ.RbOoXPJutCitMrH-tp6H7Q';
 	var map = L.mapbox.map('map', 'mapbox.streets')
-    .setView([lat, lng], 15);
+    .setView([lat, lng], 14);
 	var marker = L.marker([lat, lng]).addTo(map);
 	marker.bindPopup("<b>Your location</b><br>Click to find places near you").openPopup();
 	function onMapClick(e) {
