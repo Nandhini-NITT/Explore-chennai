@@ -40,11 +40,24 @@ var client_id='10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
 						$('#category').text(oData.response.venue.categories[0].name);
 						$('#categoryIcon').html('<img src="'+oData.response.venue.categories[0].icon.prefix+'bg_44'+oData.response.venue.categories[0].icon.suffix+'">');
 						L.mapbox.accessToken = 'pk.eyJ1IjoibmFuZGhpbmlkZXZpIiwiYSI6ImNpcWJ1bGQ1dTAwd21mbG0xZmg4bmZ2M3YifQ.RbOoXPJutCitMrH-tp6H7Q';
-						var map = L.mapbox.map('map', 'mapbox.streets')
-						.setView([13.0827, 80.2707], 12);
 						var lat=oData.response.venue.location.lat;
 						var lng=oData.response.venue.location.lng;
-						var marker = L.marker([lat, lng]).addTo(map);
+						var map = L.mapbox.map('map', 'mapbox.streets')
+						.setView([lat,lng], 14);
+						var murl='https://api.mapbox.com/geocoding/v5/mapbox.places/'+lng+','+lat+'.json?access_token=pk.eyJ1IjoibmFuZGhpbmlkZXZpIiwiYSI6ImNpcWJ1bGQ1dTAwd21mbG0xZmg4bmZ2M3YifQ.RbOoXPJutCitMrH-tp6H7Q';
+						$.ajax(murl,{
+							complete:function(xHTTP,status){
+									odata=$.parseJSON(xHTTP.responseText);
+									console.log(odata);
+									var marker = L.marker([lat, lng]).addTo(map).on('click',function(){
+									var popup = L.popup()
+									.setLatLng([lat,lng])
+									.setContent('<p>'+odata.features[0].place_name+'</p>')
+									.openOn(map)
+									});
+					
+									}
+									});
 					}
 				});
 	}
