@@ -14,24 +14,43 @@
 			var client_id='10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
 			var client_secret='T4YM5HKKRQCM1T1KQJPBMHDGPVTVBA1N3ID3NMCHIYNQDI2Q';
 			var query=$('#query').val();
-			$('#suggest').empty();
 			if(query.length>=3)
 			{
+				$('#suggest li').remove();
+				var i;
 				url='https://api.foursquare.com/v2/venues/suggestcompletion?near=chennai&query='+query+'&v=20140806&client_id='+client_id+'&client_secret='+client_secret;
 				$.ajax(url,{
 						complete:function(xHTTP,status){
 								oData=$.parseJSON(xHTTP.responseText);
 								console.log(oData);
-								for(var i=0;i<5;i++)
+								$('#suggest li').remove();
+								for(i=0;i<5;i++)
 								{
 									if("address" in oData.response.minivenues[i].location)
 										$('#suggest').append('<li><a href="viewVenue.html?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+', Location:'+oData.response.minivenues[i].location.address+'</a></li>');
 									else
 										$('#suggest').append('<li><a href="viewVenue.html?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+'</a></li>');
 								}
+								if(i<oData.response.minivenues.length)
+								{
+									$('#suggest').append('<li><a href="#" onClick="display_all();return false;">See More</a></li>');
 								}
+							}
 						});
 			}
+		}
+		function display_all()
+		{
+			var i=0;
+			$('#suggest li').remove();
+			while(i<oData.response.minivenues.length)
+				{
+					if("address" in oData.response.minivenues[i].location)
+						$('#suggest').append('<li><a href="viewVenue.html?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+', Location:'+oData.response.minivenues[i].location.address+'</a></li>');
+					else
+						$('#suggest').append('<li><a href="viewVenue.html?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+'</a></li>');
+					i++;
+				}
 		}
 	</script>
 </body>
