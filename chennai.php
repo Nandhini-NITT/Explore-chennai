@@ -15,10 +15,11 @@
 	session_start();
 	if(isset($_SESSION['user'])==1)
 	{
-		header("Location: profile.php");
+		?><style>#signin{display:none;}#user{display:block;}</style><?php
 	}
 	else
 	{
+		?><style>#signin{display:block;}</style><?php
 		if($_SERVER['REQUEST_METHOD']=="POST" )
 		{
 			include "connect.php";
@@ -33,7 +34,7 @@
 				if($pass1===$inputpass)
 				{
 					$_SESSION["user"]=$name;
-					header("Location: profile.php");
+					?><style>#user{display:block;}</style><?php
 				}
 			}
 		if($status=$sql->fetch()==false || $pass!==$row->pass)
@@ -217,10 +218,19 @@
 		<br>
 		Not registered yet?? <a href='adduser.php'>Signup</a>
 </form>
-	
+</div>
+<div id='user'>
+	Welcome <?php if(isset($_SESSION['user'])) echo $_SESSION["user"] ?>
+	<button class='btn btn-primary' onClick='logout();'><span class='glyphicon glyphicon-log-out'></span></button>
 </div>
 <div id='map-holder'>
 <div id='map' style='height:380px;width:500px;position:relative;left:100px;'></div>
 </div>
+<script>
+function logout()
+{
+	location.href='logout.php';
+}
+</script>
 </body>
 	

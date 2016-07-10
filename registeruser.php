@@ -1,8 +1,8 @@
 <?php
 
+		session_start();
 	if($_SERVER['REQUEST_METHOD']=="POST")
 	{
-		session_start();
 		$fullname=$_POST["name"];
 		$name=$_POST["uname"];
 		$email=$_POST["email"];
@@ -47,7 +47,7 @@
 			{
 				echo "Update successful";
 				$_SESSION["user"]=$name;
-				//header("Location: profile.php");
+				header("Location:chennai.php");
 			}
 		}
 		else
