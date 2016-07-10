@@ -11,6 +11,39 @@
 	<link rel='stylesheet' type='text/css' href='css\chennai.css'>
 </head>
 <body onload='getLocation();'>
+	<?php
+	session_start();
+	if(isset($_SESSION['user'])==1)
+	{
+		header("Location: profile.php");
+	}
+	else
+	{
+		if($_SERVER['REQUEST_METHOD']=="POST" )
+		{
+			include "connect.php";
+			$user=$_POST["uname"];
+			$inputpass=SHA1($_POST["password"]);
+			$sql=$conn->prepare("SELECT username,passcode from users where username=? or Phno=?");
+			$sql->bind_param('ss',$user,$user);
+			$sql->execute();
+			$sql->bind_result($name,$pass1);
+			while (($status = $sql->fetch()) === true) 
+			{ 
+				if($pass1===$inputpass)
+				{
+					$_SESSION["user"]=$name;
+					header("Location: profile.php");
+				}
+			}
+		if($status=$sql->fetch()==false || $pass!==$row->pass)
+	?>
+	<script>	alert("Invalid username or password");</script>
+<?php
+		}	
+	}
+
+?>
 	<div class="container">
   <br>
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -171,6 +204,20 @@
 	<li id='category'><a href='viewCategory.html?categoryId=4d4b7105d754a06378d81259&name=Shops and Services'>Shops and Services</a></li>
 	<li id='category'><a href='viewCategory.html?categoryId=4d4b7105d754a06379d81259&name=Travel and Transport'>Travel and Transport</a></li>
 <ul>
+</div>
+<div id='signin'>
+<form action="" method="post" style="float:right;top:20%;position:relative" id="signin">
+		<h1 align="center">SIGNIN</h1>
+		Username or Phone number:
+		<input type="text" name="uname">
+		Password:
+		<input type="password" name="password">
+		<br>
+		<button type="submit" name="submit" value="Submit">Submit</button>
+		<br>
+		Not registered yet?? <a href='adduser.php'>Signup</a>
+</form>
+	
 </div>
 <div id='map-holder'>
 <div id='map' style='height:380px;width:500px;position:relative;left:100px;'></div>
