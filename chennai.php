@@ -18,7 +18,8 @@
 		?><style>#signin{display:none;}#user{display:block;}</style><?php
 	}
 	else
-	{
+	{	
+		$flag=0;
 		?><style>#signin{display:block;}</style><?php
 		if($_SERVER['REQUEST_METHOD']=="POST" )
 		{
@@ -33,14 +34,16 @@
 			{ 
 				if($pass1===$inputpass)
 				{
+					$flag=1;
 					$_SESSION["user"]=$name;
-					?><style>#user{display:block;}</style><?php
+					?><style>#user{display:block;}#signin{display:none;}</style>
+					<?php
+					header('Loction:profile.php');
 				}
 			}
-		if($status=$sql->fetch()==false || $pass!==$row->pass)
-	?>
-	<script>	alert("Invalid username or password");</script>
-<?php
+		if($flag==0){
+		echo "Invalid login credentials";
+		}
 		}	
 	}
 
@@ -222,6 +225,7 @@
 <div id='user'>
 	Welcome <?php if(isset($_SESSION['user'])) echo $_SESSION["user"] ?>
 	<button class='btn btn-primary' onClick='logout();'><span class='glyphicon glyphicon-log-out'></span></button>
+	<br><a href='profile.php'>View your profile</a>
 </div>
 <div id='map-holder'>
 <div id='map' style='height:380px;width:500px;position:relative;left:100px;'></div>
@@ -231,6 +235,7 @@ function logout()
 {
 	location.href='logout.php';
 }
+
 </script>
 </body>
 	

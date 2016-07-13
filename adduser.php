@@ -5,9 +5,13 @@
 	<link rel="stylesheet" type="text/css" href="register.css">
 </head>
 <body>
-	<?php $Error=" ";?>
+
+<div class="header">
+	<h1 style="position:absolute;top:0;left:45%">Registration</h1>
+</div>
+	<!--<img src="signinbg.jpg" width="400" height="400" style="position:absolute;top:20%;left:10%">-->
 	<form enctype="multipart/form-data" action="registeruser.php" method="post" id="fields">
-		<p><span id="errorstatus">* required field.<?php if ($Error!=" ") echo "-"+$Error;?></span></p>
+		<p><span id="errorstatus">* required field.</span></p>
 		<table>
 			<tr>
 				<td>Full Name:</td>
@@ -51,7 +55,7 @@
 	<button type="submit" name="submit" value="Submit" onclick="return validateForm();">Submit</button>
 	</form>
 	<p style="position:absolute;bottom:0;left:45%">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
-<script  src="scripts/validation.js" type="text/javascript" >
+<script  src="validation.js" type="text/javascript" >
     </script>
 </body>
 </html>

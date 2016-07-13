@@ -1,8 +1,8 @@
 <?php
 
-		session_start();
 	if($_SERVER['REQUEST_METHOD']=="POST")
 	{
+		session_start();
 		$fullname=$_POST["name"];
 		$name=$_POST["uname"];
 		$email=$_POST["email"];
@@ -22,7 +22,7 @@
 			echo  "Invalid email format";
 		else if(empty($_POST["phno"]))
 			echo "Phone Number is required";
-		else if(!preg_match("/^[1-9][0-9]{5,10}$/",$phno))
+		else if(preg_match("/^[1-9][0-9]{5,10}$/",$phno))
 			echo "Invalid Phone number";
 		if(!isset($_FILES['userfile']))
 		{
@@ -47,11 +47,11 @@
 			{
 				echo "Update successful";
 				$_SESSION["user"]=$name;
-				header("Location:chennai.php");
+				header("Location: chennai.php");
 			}
 		}
 		else
-			echo "The emailid/Phonenumber/Username is already registered";
+			$Error="The emailid/password/Username is already registered";
 			
 	
 	}

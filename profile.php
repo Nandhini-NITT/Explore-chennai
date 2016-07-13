@@ -5,6 +5,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<link href='https://fonts.googleapis.com/css?family=Lora:400,700italic' rel='stylesheet' type='text/css'>
+	<link rel='stylesheet' type='text/css' href='css/profile.css'>
 	<script>
 		window.addEventListener("click",function(e){
 														document.getElementById("output").style.display="none";
@@ -23,7 +24,10 @@
 		$row->email="";
 		$row->name="";
 		session_start();
-		
+		if(!isset($_SESSION['user']))
+			header('Location:chennai.php');
+		else
+		{
 		include "connect.php";
 		$sql=$conn->prepare("SELECT username,name,passcode,Image,email,phno,gender from users where username=?");
 		$sql->bind_param('s',$_SESSION['user']);
@@ -31,11 +35,11 @@
 		$sql->store_result();
 		$sql->bind_result($row->id,$row->name,$row->pass,$row->image,$row->email,$row->phno,$row->gender);
 		$sql->fetch();
-		
+		}
 	?>
-	<p align="center">Welcome  <?php	
-	echo '<br>';
-	?> &nbsp 
+	<p align="center">Welcome  &nbsp
+	<button class='btn btn-primary' onClick='location.href="chennai.php"'><span class='glyphicon glyphicon glyphicon-home'></span></button>
+  <br>
   <span class='glyphicon glyphicon-search'></span>
   <input onkeyup="findmatch();" type="text"  data-toggle="tooltip" data-placement="right" title="Enter username or Phone number"
   id="search" placeholder="Search with username or Phone Number" style="width:280px;"></p>
