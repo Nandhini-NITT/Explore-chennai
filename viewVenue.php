@@ -10,6 +10,8 @@
 	<link href='https://fonts.googleapis.com/css?family=Lora:400,700italic' rel='stylesheet' type='text/css'>
 	<link rel='stylesheet' type='text/css' href='css/viewVenue.css'>
 	<script src='scripts/viewVenue.js'></script>
+	<link rel='stylesheet' type='text/css' href='css/rating.css'>
+	<script src='scripts/rating.js'></script>
 </head>
 <body onload='start();'>
 <script>
@@ -47,10 +49,12 @@ function getParameterByName(name, url) {
 				if($pass1===$inputpass)
 				{
 					$flag=1;
+					$stmt=$conn->prepare("SELECT review from user_reviews where username= ?");
+					$stmt->bind_param('s',$name);
+					if($stmt->execute())
 					$_SESSION["user"]=$name;
 					?><style>#login{display:none;}#addReview{display:block;}</style>
 					<?php
-					header('Loction:profile.php');
 				}
 			}
 		if($flag==0){
@@ -112,9 +116,10 @@ function getParameterByName(name, url) {
 			</form>
 		  </div>
 		  <div id='addReview'>
-			<textarea rows="4" cols="50" id='review' autofocus>
+			<textarea rows="4" cols="50" id='review' required>
 			</textarea>
-			<button class='btn btn-primary' onClick='add();'>Submit</button>
+			<button class='btn btn-primary' onClick='add();' type='submit'>Submit</button>
+			<br>
 		</div>
         </div>
         <div class="modal-footer">
@@ -125,6 +130,7 @@ function getParameterByName(name, url) {
     </div>
   </div>
 <script>
+var star;
 	function add()
 	{
 		var xhttp = new XMLHttpRequest();
@@ -134,9 +140,22 @@ function getParameterByName(name, url) {
 		$('#myModal').modal('hide');
 		}
 		};
-		xhttp.open("GET", "addReview.php?id="+getParameterByName('id')+"&review="+document.getElementById('review').value, true);
+		xhttp.open("GET", "addReview.php?id="+getParameterByName('id')+"&stars="+star+"&review="+document.getElementById('review').value, true);
 		xhttp.send();
 	}
+	var el = document.querySelector('#addReview');
+
+// current rating, or initial rating
+var currentRating = 0;
+
+// max rating, i.e. number of stars you want
+var maxRating= 5;
+
+// callback to run after setting the rating
+var callback = function(rating) { star=rating; };
+
+// rating instance
+var myRating = rating(el, currentRating, maxRating, callback);
 </script>
 </body>
 </html>
