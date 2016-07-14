@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" type="text/css" href="profile.css">
+	<link rel="stylesheet" type="text/css" href="css/profile.css">
 	<link href='https://fonts.googleapis.com/css?family=Lora:400,700italic' rel='stylesheet' type='text/css'>
 	</head>
 	<body><?php

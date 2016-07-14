@@ -28,12 +28,12 @@ var client_id='10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
 							var img=oData.response.venue.photos.groups[0].items[i].prefix+'width500'+oData.response.venue.photos.groups[0].items[i].suffix;
 							if(i==0)
 								{
-								$('.carousel-inner').append('<div class="item active"><img src="'+img+'"></div>');
+								$('.carousel-inner').append('<div class="item active"><img src="'+img+'"><div class="absolute-div"><div class="carousel-caption"><h3 style="color:white">From foursquare users</h3></div></div></div>');
 								$('.carousel-indicators').append('<li data-target="#myCarousel" data-slide-to="'+i+'" class="active"></li>');
 								}
 							else
 								{
-								$('.carousel-inner').append('<div class="item"><img src="'+img+'"></div>');
+								$('.carousel-inner').append('<div class="item"><img src="'+img+'"><div class="absolute-div"><div class="carousel-caption"><h3 style="color:white">From foursquare users</h3></div></div></div>');
 								$('.carousel-indicators').append('<li data-target="#myCarousel" data-slide-to="'+i+'"></li>');
 								}
 						}

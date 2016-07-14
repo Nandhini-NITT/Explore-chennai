@@ -6,10 +6,21 @@
   
   #myCarousel{
 	width:50%;
-	position:relative;
-	left:25%;
 	}
 #myCarousel img{
 position:relative;
 height:500px;
+}
+#name{
+position:relative;
+font-family: 'Lora', serif;
+font-weight:bold;
+font-size:35px;
+}
+span {
+display:table;
+margin:0 auto;
+}
+#login{
+display:none;
 }
