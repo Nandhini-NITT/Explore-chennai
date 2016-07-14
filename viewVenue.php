@@ -49,9 +49,6 @@ function getParameterByName(name, url) {
 				if($pass1===$inputpass)
 				{
 					$flag=1;
-					$stmt=$conn->prepare("SELECT review from user_reviews where username= ?");
-					$stmt->bind_param('s',$name);
-					if($stmt->execute())
 					$_SESSION["user"]=$name;
 					?><style>#login{display:none;}#addReview{display:block;}</style>
 					<?php
@@ -63,9 +60,22 @@ function getParameterByName(name, url) {
 		}
 		}	
 	}
+	
 
 ?>
-	
+<?php include "connect.php";
+			$reviews=" ";
+			$sql="Select * from user_reviews where user_id='".$_SESSION['user']."' and venue_id='".$_GET['id']."' ";
+			$stmt=$conn->query($sql);
+			if($stmt->num_rows==0){
+			?><style>#addReview{display:block;}#view{display:none;}</style><?php
+			}
+			else{
+				$row1= $stmt->fetch_assoc();
+				?><style>#addReview{display:none;}#view{display:block;}</style>
+					 <?php
+			}
+			?>
 	
 <span id='name'>Title</span>
 	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Review</button>
@@ -116,10 +126,25 @@ function getParameterByName(name, url) {
 			</form>
 		  </div>
 		  <div id='addReview'>
-			<textarea rows="4" cols="50" id='review' required>
+		  <textarea rows='4' cols='50' id='review' required>
 			</textarea>
 			<button class='btn btn-primary' onClick='add();' type='submit'>Submit</button>
-			<br>
+			<br>;
+		</div>
+		<div id='view'>
+		Your Review about the place <br>
+		<?php echo $row1["Review"];echo "<div id='star'></div>"; ?>
+		<script>
+			$('.modal-title').text("View Review");
+			var el = document.querySelector('#star');
+			var currentRating = 0;
+			var maxRating= 5;
+			// callback to run after setting the rating
+			var callback = function(rating) { star=rating; };
+			// rating instance
+			var showRating = rating(el, currentRating, maxRating, callback);
+			showRating.setRating(<?php echo $row1["star"]; ?>);
+		</script>
 		</div>
         </div>
         <div class="modal-footer">
