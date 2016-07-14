@@ -131,19 +131,35 @@ function getParameterByName(name, url) {
 			<button class='btn btn-primary' onClick='add();' type='submit'>Submit</button>
 			<br>;
 		</div>
+		<br>
 		<div id='view'>
 		Your Review about the place <br>
-		<?php echo $row1["Review"];echo "<div id='star'></div>"; ?>
+		<?php echo $row1["Review"];echo "<div id='star' style='display:-webkit-inline-box'><br></div><button class='btn btn-primry' onClick='update();'>Edit</button>"; ?>
 		<script>
 			$('.modal-title').text("View Review");
 			var el = document.querySelector('#star');
 			var currentRating = 0;
-			var maxRating= 5;
-			// callback to run after setting the rating
-			var callback = function(rating) { star=rating; };
-			// rating instance
-			var showRating = rating(el, currentRating, maxRating, callback);
-			showRating.setRating(<?php echo $row1["star"]; ?>);
+			var star=<?php echo $row1["star"]; ?>;
+			var stars=function(){
+			for(var i=0;i<star;i++)
+			{
+				$('#star').append("<span style='color:gold;size:40%;display:inline-block;font-size:30px'>&#9733;</span>");
+			}
+			};
+			var displayStar=new stars();
+			function update()
+			{
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+				if (xhttp.readyState == 4 && xhttp.status == 200) {
+					alert(xhttp.responseText);
+					$('#view').hide();
+					$('#addReview').show();
+					}
+				};
+				xhttp.open("GET", "updateReview.php", true);
+				xhttp.send();
+			}
 		</script>
 		</div>
         </div>
