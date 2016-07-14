@@ -79,6 +79,11 @@ function getParameterByName(name, url) {
 	
 <span id='name'>Title</span>
 	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Review</button>
+	<div id='links' style='float:right'>
+	<a href='chennai.php'>Back to Home</a>
+	<br>
+	<a href='profile.php'>View your profile</a>
+	</div>
 	<span id='category'></span>
 	<span id='categoryIcon'></span>
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">

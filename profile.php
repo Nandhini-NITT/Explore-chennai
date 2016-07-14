@@ -48,11 +48,16 @@
 <?php
 include "connect.php";
 echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row->image ).'"/>';
-?></div>
+?>
 <button class="btn btn-info" id="Edit" onClick="updatedp();">
           <span class="glyphicon glyphicon-pencil"></span>
 </button>
-
+</div>
+<nav class="navbar navbar-defaut">
+    <ul class="nav navbar-nav">
+	<a href='#' onClick='viewRequest();return false;'>View friend request</a>
+</ul>
+</nav>
 <div  id="output">
 	
 	</div>
@@ -102,9 +107,22 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row->image ).'"
 	<br><br><br><br>
 	<p style="position:absolute;bottom:0;left:25%;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
 </div>
-
+<div id='requests'></div>
 <script>
 var param="";
+	function viewRequest()
+	{
+		$('#contents').hide();
+		$('#img-holder').hide();
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
+				$("#requests").append(xmlhttp.responseText);
+			}
+		}
+		xmlhttp.open('GET','getrequest.php',true);
+		xmlhttp.send();
+	}
 	function findmatch(){
 		var search_text = document.getElementById('search').value;
 		document.getElementById("output").style.display="block";
