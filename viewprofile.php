@@ -29,11 +29,38 @@
 	}
 	
 ?>
-<a href="profile.php" style="position:absolute;left:5%;top:10%;font-size:20px"><=Back to your profile</a>
-<div style="position:relative;left:40%">
-<span class='glyphicon glyphicon-search'></span>
-  <input onkeyup="findmatch();" type="text" data-toggle="tooltip" data-placement="right" title="Enter username" id="search" placeholder="Find What's up with your friends" style="width:280px;"></p>
-</div>	
+<nav class="navbar navbar-full navbar-dark bg-primary">
+  <a class="navbar-brand"  href="#">Chennai Daw</a>
+  <ul class="nav navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="chennai.php">Home <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Add checkin</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="profile.php">Your Profile</a>
+    </li>
+	<li class="nav-item">
+      <a class="nav-link" href="friends.php">Friends</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Notifications</a>
+    </li>
+	<li class="nav-item">
+      <a class="nav-link" href="#" onClick='viewRequest();return false;'>Friend requests</a>
+    </li>
+	<li class="nav-item pull-xs-right">
+      <a class="nav-link" href="logout.php">Logout</a>
+    </li>
+  </ul>
+  <form class="form-inline">
+    <span class='glyphicon glyphicon-search'></span>
+  <input class='form-control' onkeyup="findmatch();" type="text"  data-toggle="tooltip" data-placement="right" title="Enter username or Phone number"
+  id="search" placeholder="Search with username or Phone Number" style='width:300px'></p>
+  </form>
+
+</nav>
   <div id="img-holder">
 <?php
 include "connect.php";
@@ -71,7 +98,7 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] )
 	
 	</table>
 	<br>
-	<input type="button" onclick="document.location.href='logout.php'" value="Logout" style="position:relative;left:30%">
+
 	<br><br><br><br>
 	<p style="position:absolute;bottom:0;left:25%;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
 </div>
