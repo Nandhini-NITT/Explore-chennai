@@ -50,7 +50,7 @@
       <a class="nav-link" href="profile.php">Your Profile</a>
     </li>
 	<li class="nav-item">
-      <a class="nav-link" href="friends.php">Friends</a>
+      <a class="nav-link" href="#" onClick='display_Friends();return false;'>Friends</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Notifications</a>
@@ -129,6 +129,7 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row->image ).'"
 	<p style="position:absolute;bottom:0;left:25%;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
 </div>
 <div id='requests' style='display:table;margin:0 auto'></div>
+<div id='friends'></div>
 <script>
 var param="";
 	function viewRequest()
@@ -279,7 +280,20 @@ var param="";
 		xhttp.open("GET", "update.php?"+param+"="+newvalue, true);
 		xhttp.send();
 	}
-	
+	function display_Friends()
+	{
+		$('#contents').hide();
+		$('#img-holder').hide();
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
+				
+				$("#friends").append(xmlhttp.responseText);
+			}
+		}
+		xmlhttp.open('GET','friends.php',true);
+		xmlhttp.send();
+	}
 </script>
 
 </body>
