@@ -61,7 +61,6 @@ function getParameterByName(name, url) {
 		}	
 	}
 	
-
 ?>
 <?php include "connect.php";
 			$reviews=" ";
@@ -105,7 +104,6 @@ function getParameterByName(name, url) {
 	<p style='display:table;margin:0 auto'>Click on the marker to know the address of location</p>
 	<div id='map' style='height:300px;display:table;margin:0 auto;width:500px'>
 	</div>
-</div>
 <div id='frame'>
 <p>Reviews from users</p>
 	</div>
@@ -141,8 +139,10 @@ function getParameterByName(name, url) {
 				<option>Public</option>
 				<option>Only Friends</option>
 			</select>
+			Post as Anonymous:<input type='checkbox' value="Anonymous" id='anonymous'>
+			<br>
 			<button class='btn btn-primary' onClick='add();' type='submit'>Submit</button>
-			<br>;
+			<br>
 		</div>
 		<br>
 		<div id='view'>
@@ -187,6 +187,9 @@ function getParameterByName(name, url) {
 var star;
 	function add()
 	{
+		var anonymous=0;
+		if(document.getElementById("anonymous").checked)
+			anonymous=1;
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -195,20 +198,17 @@ var star;
 		location.reload();
 		}
 		};
-		xhttp.open("GET", "addReview.php?id="+getParameterByName('id')+"&visibility="+document.getElementById("visibility").value+"&stars="+star+"&review="+document.getElementById('review').value, true);
+		
+		xhttp.open("GET", "addReview.php?id="+getParameterByName('id')+"&anonymous="+anonymous+"&visibility="+document.getElementById("visibility").value+"&stars="+star+"&review="+document.getElementById('review').value, true);
 		xhttp.send();
 	}
 	var el = document.querySelector('#addReview');
-
 // current rating, or initial rating
 var currentRating = 0;
-
 // max rating, i.e. number of stars you want
 var maxRating= 5;
-
 // callback to run after setting the rating
 var callback = function(rating) { star=rating; };
-
 // rating instance
 var myRating = rating(el, currentRating, maxRating, callback);
 </script>

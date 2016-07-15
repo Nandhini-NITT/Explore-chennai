@@ -12,15 +12,20 @@ if($query==true)
 	{
 		$row=$query->fetch_assoc();
 		if(checkaccess($row))
-		echo "<li>".identifyAuthor($row['user_id'])."</li><li>".$row['Review']."</li>".insertStar($row['star']);
+		echo "<li>".identifyAuthor($row)."</li><li>".$row['Review']."</li>".insertStar($row['star']);
 		$control++;
 	}
 }
-function identifyAuthor($name)
+function identifyAuthor($row)
 {
+	$name=$row['user_id'];
 	if($name==$_SESSION['user'])
 	echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>Your review</a>";
-	else
+	else if($name==$_SESSION['user'] && $row['Anonymous']==1)
+	echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>Your review(Posted as anonymous)</a>";
+	else if($row['Anonymous']==1)
+	echo "Anonymous";
+	else if($row['Anonymous']==0)
 	echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>".$name."</a>";
 }
 function insertStar($star)
