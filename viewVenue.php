@@ -136,6 +136,11 @@ function getParameterByName(name, url) {
 		  <div id='addReview'>
 		  <textarea rows='4' cols='50' id='review' required>
 			</textarea>
+			<br>
+			<select class="form-control" id='visibility'>
+				<option>Public</option>
+				<option>Only Friends</option>
+			</select>
 			<button class='btn btn-primary' onClick='add();' type='submit'>Submit</button>
 			<br>;
 		</div>
@@ -187,9 +192,10 @@ var star;
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
 		alert(xhttp.responseText);
 		$('#myModal').modal('hide');
+		location.reload();
 		}
 		};
-		xhttp.open("GET", "addReview.php?id="+getParameterByName('id')+"&stars="+star+"&review="+document.getElementById('review').value, true);
+		xhttp.open("GET", "addReview.php?id="+getParameterByName('id')+"&visibility="+document.getElementById("visibility").value+"&stars="+star+"&review="+document.getElementById('review').value, true);
 		xhttp.send();
 	}
 	var el = document.querySelector('#addReview');
