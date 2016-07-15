@@ -65,7 +65,6 @@ var client_id='10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 				if (xhttp.readyState == 4 && xhttp.status == 200) {
-					alert(xhttp.responseText);
 					$('#frame').append(xhttp.responseText);
 					
 					}

@@ -1,5 +1,6 @@
 <?php
 include "connect.php";
+$row="";
 session_start();
 $venue=$_GET['id'];
 $sql="Select * from user_reviews where venue_id='".$venue."'";
@@ -10,9 +11,16 @@ if($query==true)
 	while($control<$conn->affected_rows)
 	{
 		$row=$query->fetch_assoc();
-		echo "<li><a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$row['user_id']."'>".$row['user_id']."</a></li><li>".$row['Review']."</li>".insertStar($row['star']);
+		echo "<li>".identifyAuthor($row['user_id'])."</li><li>".$row['Review']."</li>".insertStar($row['star']);
 		$control++;
 	}
+}
+function identifyAuthor($name)
+{
+	if($name==$_SESSION['user'])
+	echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>Your review</a>";
+	else
+	echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>".$name."</a>";
 }
 function insertStar($star)
 {
