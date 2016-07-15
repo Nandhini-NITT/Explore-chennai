@@ -26,5 +26,6 @@ if($stmt->num_rows==0)
 		echo "<button class='btn btn-success' onClick='acceptRequest();'><span class='glyphicon glyphicon-ok'></span>&nbsp Accept</button>&nbsp<button class='btn btn-danger' onClick='deleteRequest();'><span class='glyphicon glyphicon-remove'></span>&nbspCancel</button>";
 }
 else
-echo "<button class='btn btn-success'><span class='glyphicon glyphicon-user'></span>&nbsp Friends</button>";
+echo "<div class='btn-group'><button class='btn btn-success dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><span class='glyphicon glyphicon-user'></span> &nbsp Friends</button><div class='dropdown-menu'><a class='dropdown-item' href='#' onClick='deleteRequest();'>Unfriend</a>
+    </div></div>";
 ?>
