@@ -37,12 +37,39 @@
 		$sql->fetch();
 		}
 	?>
-	<p align="center">Welcome  &nbsp
-	<button class='btn btn-primary' onClick='location.href="chennai.php"'><span class='glyphicon glyphicon glyphicon-home'></span></button>
-  <br>
-  <span class='glyphicon glyphicon-search'></span>
-  <input onkeyup="findmatch();" type="text"  data-toggle="tooltip" data-placement="right" title="Enter username or Phone number"
-  id="search" placeholder="Search with username or Phone Number" style="width:280px;"></p>
+	<nav class="navbar navbar-full navbar-dark bg-primary">
+  <a class="navbar-brand"  href="#">Chennai Daw</a>
+  <ul class="nav navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="chennai.php">Home <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Add checkin</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="profile.php">Your Profile</a>
+    </li>
+	<li class="nav-item">
+      <a class="nav-link" href="friends.php">Friends</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Notifications</a>
+    </li>
+	<li class="nav-item">
+      <a class="nav-link" href="#" onClick='viewRequest();return false;'>Friend requests</a>
+    </li>
+	<li class="nav-item pull-xs-right">
+      <a class="nav-link" href="logout.php">Logout</a>
+    </li>
+  </ul>
+  <form class="form-inline">
+    <span class='glyphicon glyphicon-search'></span>
+  <input class='form-control' onkeyup="findmatch();" type="text"  data-toggle="tooltip" data-placement="right" title="Enter username or Phone number"
+  id="search" placeholder="Search with username or Phone Number" style='width:300px'></p>
+  </form>
+
+</nav>
+  
 	
   <div id="img-holder">
 <?php
@@ -53,11 +80,7 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row->image ).'"
           <span class="glyphicon glyphicon-pencil"></span>
 </button>
 </div>
-<nav class="navbar navbar-defaut">
-    <ul class="nav navbar-nav">
-	<a href='#' onClick='viewRequest();return false;'>View friend request</a>
-</ul>
-</nav>
+   
 <div  id="output">
 	
 	</div>
@@ -102,12 +125,10 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row->image ).'"
 	<br>
 		<button align="center" style="position:relative;left:25%" onclick="updatepassword();">Change Password</button>
 	<br>
-	<br>
-	<input type="button" onclick="document.location.href='logout.php'" value="Logout" style="position:relative;left:30%">
 	<br><br><br><br>
 	<p style="position:absolute;bottom:0;left:25%;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
 </div>
-<div id='requests'></div>
+<div id='requests' style='display:table;margin:0 auto'></div>
 <script>
 var param="";
 	function viewRequest()

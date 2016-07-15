@@ -7,7 +7,15 @@ $control=0;
 while($control<$stmt->num_rows)
 {
 $row=$stmt->fetch_assoc();
-echo "<li><a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$row['sender']."'><div id='suggestions'>".$row['sender']."</div></a></li>";
+$user = $row['sender'];
+	$sql = "SELECT username,name,email,phno,gender,Image from users where username like'".$user."%'";
+		$result = $conn->query($sql);
+	if ($result->num_rows == 1) {
+		$row1= $result->fetch_assoc();
+		}
+	else
+		echo "Not found";
+echo "<li> <img id='dp' src='data:image/jpeg;base64,".base64_encode( $row1['Image'] )."'/><a role='menuitem' tabindex='0' href='viewprofile.php?username=".$row['sender']."'>".$row['sender']."</a></li>";
 $control++;
 }
 ?>
