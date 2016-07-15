@@ -4,9 +4,13 @@ font-size:30px;
 }
 
 #img-holder{
-position:absolute;
+position:relative;
 left:41%;
-z-index:-1;
+}
+#Edit{
+position:absolute;
+margin-bottom:0px;
+float:right;
 }
 .nav-link ,.navbar-brand{
 color:white;
@@ -19,22 +23,12 @@ top:1rem;
 img{
 width:300px;
 height:300px;
-z-index:-1;
 }
-#Edit{
-position:absolute;
-left:64%;
-top:56%;
-}
+
 #contents
 {
-position:fixed;
+display:table;
 margin:0 auto;
-position:absolute;
-top:85%;
-left:54%;
-transform:translate(-50%,-50%);
-
 }
 ::-webkit-input-placeholder {
    color: red;

@@ -11,7 +11,6 @@
 														document.getElementById("output").style.display="none";
 													});
 	</script>
-	<script src='scripts/validation.js'></script>
 </head>
 <body>
 	<?php 
@@ -85,8 +84,9 @@
 include "connect.php";
 echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row->image ).'"/>';
 ?>
+
 <button class="btn btn-info" id="Edit" onClick="updatedp();">
-          <span class="glyphicon glyphicon-pencil"></span>
+          <span class="glyphicon glyphicon-pencil"></span>&nbspEdit
 </button>
 </div>
    
@@ -99,7 +99,7 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row->image ).'"
 		</div>
 	</div>	
 <div id="contents">
-	<h1 style="position:relative;left:25px;top:30px">Contact Information</h1><br>
+	<h1>Contact Information</h1><br>
 	<hr color="black">
 	<table>
 		<div id="name">
@@ -135,7 +135,7 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row->image ).'"
 		<button align="center" style="position:relative;left:25%" onclick="updatepassword();">Change Password</button>
 	<br>
 	<br><br><br><br>
-	<p style="position:absolute;bottom:0;left:25%;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
+	<p style="display:inline-block;text-align:center;position:relative;bottom:0;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
 </div>
 <div id='requests' style='display:table;margin:0 auto'></div>
 <div id='friends'></div>
@@ -199,7 +199,6 @@ var param="";
 	}
 	function updatedp()
 	{
-		alert("called");
 		param="Image";
 		var modal=document.getElementById("id01");
 		modal.style.display="block";
