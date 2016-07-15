@@ -24,3 +24,12 @@ margin:0 auto;
 #login{
 display:none;
 }
+div#frame {
+   background-color:burlywood;
+    position:absolute;
+	top:25%;
+	left:50%;
+	width:50%;
+	height:500px;
+	float:right;
+}

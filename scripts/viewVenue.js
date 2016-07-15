@@ -16,11 +16,13 @@ var client_id='10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
 				complete:function(xHTTP,status){
 						
 						oData=$.parseJSON(xHTTP.responseText);
-						console.log(oData);
 						var flag=0;
 						$('#name').text(oData.response.venue.name);
 						if(oData.response.venue.photos.count==0)
+							{
 							$('#pics').append('<img src="Images/Not available.png">');
+							$('#myCarousel').remove();
+							}
 						else
 							for(var i=0;i<oData.response.venue.photos.groups[0].items.length;i++)
 						{
@@ -60,4 +62,14 @@ var client_id='10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
 									});
 					}
 				});
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+				if (xhttp.readyState == 4 && xhttp.status == 200) {
+					alert(xhttp.responseText);
+					$('#frame').append(xhttp.responseText);
+					
+					}
+				};
+				xhttp.open("GET", "fetchReviews.php?id="+id, true);
+				xhttp.send();
 	}

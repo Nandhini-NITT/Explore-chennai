@@ -106,6 +106,9 @@ function getParameterByName(name, url) {
 	<div id='map' style='height:300px;display:table;margin:0 auto;width:500px'>
 	</div>
 </div>
+<div id='frame'>
+<p>Reviews from users</p>
+	</div>
 <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">

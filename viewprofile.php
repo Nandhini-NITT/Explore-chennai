@@ -69,6 +69,7 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] )
 </div>
 <div  id="output">
 </div>
+<div id='requests'></div>
 <div id="contents">
 	<h1 style="position:relative;left:25px;top:30%">Contact Information</h1>
 	<div id='addFriend'>
@@ -104,6 +105,19 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] )
 </div>
 
 	<script>
+	function viewRequest()
+	{
+		$('#contents').hide();
+		$('#img-holder').hide();
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
+				$("#requests").append(xmlhttp.responseText);
+			}
+		}
+		xmlhttp.open('GET','getrequest.php',true);
+		xmlhttp.send();
+	}
 		window.onload=function(){
 				updatebutton();
 				};
@@ -174,6 +188,7 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] )
 		xmlhttp.open('GET','addFriend.php?id='+getParameterByName('username'),true);
 		xmlhttp.send();
 	}
+	
 		
 	</script>
 	</body>

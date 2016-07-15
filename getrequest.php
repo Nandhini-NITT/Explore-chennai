@@ -18,4 +18,6 @@ $user = $row['sender'];
 echo "<li> <img id='dp' src='data:image/jpeg;base64,".base64_encode( $row1['Image'] )."'/><a role='menuitem' tabindex='0' href='viewprofile.php?username=".$row['sender']."'>".$row['sender']."</a></li>";
 $control++;
 }
+if($control==0)
+	echo "No new requests";
 ?>
