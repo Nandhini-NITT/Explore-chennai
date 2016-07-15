@@ -92,6 +92,17 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] )
 		xmlhttp.open('GET','getuser.php?search_text='+search_text,true);
 		xmlhttp.send();
 	}
+	function deleteRequest(){
+	var xmlhttp=new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
+				alert(xmlhttp.responseText);
+				updatebutton();
+			}
+		}
+		xmlhttp.open('GET','removeFriend.php?id='+getParameterByName('username'),true);
+		xmlhttp.send();
+	}
 	function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -118,6 +129,7 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] )
 		xmlhttp.onreadystatechange=function(){
 			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
 				alert(xmlhttp.responseText);
+				updatebutton();
 			}
 		}
 		xmlhttp.open('GET','accept.php?id='+getParameterByName('username'),true);
