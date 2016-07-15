@@ -19,14 +19,20 @@ if($query==true)
 function identifyAuthor($row)
 {
 	$name=$row['user_id'];
-	if($name==$_SESSION['user'])
-	echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>Your review</a>";
-	else if($name==$_SESSION['user'] && $row['Anonymous']==1)
-	echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>Your review(Posted as anonymous)</a>";
-	else if($row['Anonymous']==1)
-	echo "Anonymous";
-	else if($row['Anonymous']==0)
-	echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>".$name."</a>";
+	if(isset($_SESSION['user']))
+	{
+		if($name==$_SESSION['user'])
+			echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>Your review</a>";
+		else if($name==$_SESSION['user'] && $row['Anonymous']==1)
+			echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>Your review(Posted as anonymous)</a>";
+	}
+	else
+	{
+		if($row['Anonymous']==1)
+			echo "Anonymous";
+		else if($row['Anonymous']==0)
+			echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>".$name."</a>";
+	}
 }
 function insertStar($star)
 {

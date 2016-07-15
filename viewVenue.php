@@ -27,9 +27,22 @@ function getParameterByName(name, url) {
 </script>
 <?php
 	session_start();
+	include "connect.php";
 	if(isset($_SESSION['user'])==1)
 	{
 		?><style>#login{display:none;}#addReview{display:block;}</style><?php
+		$reviews=" ";
+			$sql="Select * from user_reviews where user_id='".$_SESSION['user']."' and venue_id='".$_GET['id']."' ";
+			$stmt=$conn->query($sql);
+			if($stmt->num_rows==0){
+			?><style>#addReview{display:block;}#view{display:none;}</style><?php
+			}
+			else{
+				$row1= $stmt->fetch_assoc();
+				?><style>#addReview{display:none;}#view{display:block;}</style>
+					 <?php
+			}
+			
 	}
 	else
 	{	
@@ -60,29 +73,49 @@ function getParameterByName(name, url) {
 		}
 		}	
 	}
-	
-?>
-<?php include "connect.php";
-			$reviews=" ";
-			$sql="Select * from user_reviews where user_id='".$_SESSION['user']."' and venue_id='".$_GET['id']."' ";
-			$stmt=$conn->query($sql);
-			if($stmt->num_rows==0){
-			?><style>#addReview{display:block;}#view{display:none;}</style><?php
-			}
-			else{
-				$row1= $stmt->fetch_assoc();
-				?><style>#addReview{display:none;}#view{display:block;}</style>
-					 <?php
-			}
-			?>
-	
+	?>		
+<nav class="navbar navbar-full navbar-dark bg-primary">
+  <a class="navbar-brand"  href="#">Chennai Daw</a>
+  <ul class="nav navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="chennai.php">Home <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Add checkin</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="profile.php">Your Profile</a>
+    </li>
+	<li class="nav-item">
+      <a class="nav-link" href="#" onClick='display_Friends();return false;'>Friends</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Notifications</a>
+    </li>
+	<li class="nav-item">
+      <a class="nav-link" href="#" onClick='viewRequest();return false;'>Friend requests</a>
+    </li>
+	<li class="nav-item">
+      <a class="nav-link" href="search.html">Search in all categories</a>
+    </li>
+	<li class="nav-item pull-xs-right">
+	<?php 
+	if(isset($_SESSION['user']))
+			echo '<a class="nav-link" href="logout.php">Logout</a>';
+	else
+		echo '<a class="nav-link" href="login.php">Login</a>';
+	?>
+    </li>
+  </ul>
+  <form class="form-inline">
+    <span class='glyphicon glyphicon-search'></span>
+  <input class='form-control' onkeyup="findmatch();" type="text"  data-toggle="tooltip" data-placement="right" title="Enter username or Phone number"
+  id="search" placeholder="Search with username or Phone Number" style='width:300px'></p>
+  </form>
+
+</nav>
 <span id='name'>Title</span>
 	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Review</button>
-	<div id='links' style='float:right'>
-	<a href='chennai.php'>Back to Home</a>
-	<br>
-	<a href='profile.php'>View your profile</a>
-	</div>
 	<span id='category'></span>
 	<span id='categoryIcon'></span>
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">

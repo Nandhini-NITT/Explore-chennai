@@ -27,9 +27,17 @@ display:none;
 div#frame {
    background-color:burlywood;
     position:absolute;
-	top:25%;
+	top:35%;
 	left:50%;
 	width:50%;
 	height:500px;
 	float:right;
+}
+.nav-link ,.navbar-brand{
+color:white;
+}
+.form-inline
+{
+position:relative;
+top:1rem;
 }

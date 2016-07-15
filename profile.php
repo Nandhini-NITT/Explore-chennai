@@ -58,8 +58,16 @@
 	<li class="nav-item">
       <a class="nav-link" href="#" onClick='viewRequest();return false;'>Friend requests</a>
     </li>
+	<li class="nav-item">
+      <a class="nav-link" href="search.html">Search in all categories</a>
+    </li>
 	<li class="nav-item pull-xs-right">
-      <a class="nav-link" href="logout.php">Logout</a>
+	<?php 
+	if(isset($_SESSION['user']))
+			echo '<a class="nav-link" href="logout.php">Logout</a>';
+	else
+		echo '<a class="nav-link" href="login.php">Login</a>';
+	?>
     </li>
   </ul>
   <form class="form-inline">

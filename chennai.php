@@ -193,20 +193,20 @@
 </div>
 <div class='menu'>
 <ul>
-	<li id='category'><a href='viewCategory.html?categoryId=4d4b7104d754a06370d81259&name=Arts and Entertainment'>Arts and Entertainment</a></li>
-	<li id='category'><a href='viewCategory.html?categoryId=4d4b7105d754a06372d81259&name=College and University'>College and University</a></li>
-	<li id='category' style='padding-top:4rem'><a href='viewCategory.html?categoryId=4d4b7105d754a06373d81259&name=Events'>Events</a></li>
-	<li id='category' style='padding-top:4rem'><a href='viewCategory.html?categoryId=4d4b7105d754a06374d81259&name=Food'>Food</a></li>
-	<li id='category' style='padding-top:4rem'><a href='viewCategory.html?categoryId=4d4b7105d754a06376d81259&name=Night Life spots'>Night Life Spot</a></li>
+	<li id='category'><a href='viewCategory.php?categoryId=4d4b7104d754a06370d81259&name=Arts and Entertainment'>Arts and Entertainment</a></li>
+	<li id='category'><a href='viewCategory.php?categoryId=4d4b7105d754a06372d81259&name=College and University'>College and University</a></li>
+	<li id='category' style='padding-top:4rem'><a href='viewCategory.php?categoryId=4d4b7105d754a06373d81259&name=Events'>Events</a></li>
+	<li id='category' style='padding-top:4rem'><a href='viewCategory.php?categoryId=4d4b7105d754a06374d81259&name=Food'>Food</a></li>
+	<li id='category' style='padding-top:4rem'><a href='viewCategory.php?categoryId=4d4b7105d754a06376d81259&name=Night Life spots'>Night Life Spot</a></li>
 </ul>
 </div>
 <div class='right-menu'>
 <ul>
-	<li id='category'><a href='viewCategory.html?categoryId=4d4b7105d754a06377d81259&name=Outdoors and Recreation'>Outdoors and Recreation</a></li>
-	<li id='category' style='padding-top:2rem'><a href='viewCategory.html?categoryId=4d4b7105d754a06375d81259&name=Professional and other Places'>Professional and other places</a></li>
-	<li id='category' style='padding-top:4rem'><a href='viewCategory.html?categoryId=4e67e38e036454776db1fb3a&name=Residence'>Residence</a></li>
-	<li id='category'><a href='viewCategory.html?categoryId=4d4b7105d754a06378d81259&name=Shops and Services'>Shops and Services</a></li>
-	<li id='category'><a href='viewCategory.html?categoryId=4d4b7105d754a06379d81259&name=Travel and Transport'>Travel and Transport</a></li>
+	<li id='category'><a href='viewCategory.php?categoryId=4d4b7105d754a06377d81259&name=Outdoors and Recreation'>Outdoors and Recreation</a></li>
+	<li id='category' style='padding-top:2rem'><a href='viewCategory.php?categoryId=4d4b7105d754a06375d81259&name=Professional and other Places'>Professional and other places</a></li>
+	<li id='category' style='padding-top:4rem'><a href='viewCategory.php?categoryId=4e67e38e036454776db1fb3a&name=Residence'>Residence</a></li>
+	<li id='category'><a href='viewCategory.php?categoryId=4d4b7105d754a06378d81259&name=Shops and Services'>Shops and Services</a></li>
+	<li id='category'><a href='viewCategory.php?categoryId=4d4b7105d754a06379d81259&name=Travel and Transport'>Travel and Transport</a></li>
 <ul>
 </div>
 <div id='signin'>
