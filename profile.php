@@ -11,6 +11,7 @@
 														document.getElementById("output").style.display="none";
 													});
 	</script>
+	<script src='scripts/validation.js'></script>
 </head>
 <body>
 	<?php 
@@ -227,7 +228,7 @@ var param="";
 			alert(xmlHttp.responseText);
 			if(xmlHttp.responseText=="Success.Please Login again")
 				{
-				document.location.href='index.php';
+				document.location.href='chennai.php';
 			document.getElementById("id01").style.display="none";
 				}
 			
