@@ -17,6 +17,18 @@ function addRowHandlers()
 		}(rows[i]);
 	}
 }
+function findmatch(){
+		var search_text = document.getElementById('search').value;
+		document.getElementById("output").style.display="block";
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
+				document.getElementById("output").innerHTML = xmlhttp.responseText;
+			}
+		}
+		xmlhttp.open('GET','getuser.php?search_text='+search_text,true);
+		xmlhttp.send();
+	}
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");

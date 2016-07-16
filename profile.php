@@ -77,7 +77,9 @@
   </form>
 
 </nav>
-  
+  <div  id="output">
+	
+	</div>
 	
   <div id="img-holder">
 <?php
@@ -89,10 +91,6 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row->image ).'"
           <span class="glyphicon glyphicon-pencil"></span>&nbspEdit
 </button>
 </div>
-   
-<div  id="output">
-	
-	</div>
 <div id="id01" class="modal">
 	
 	<div class="modal-content" id="change">

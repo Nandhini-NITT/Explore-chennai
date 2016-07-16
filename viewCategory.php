@@ -59,6 +59,8 @@ top:1rem;
   </form>
 
 </nav>
+<div id='output'>
+</div>
 	<div id='searchInCategory' style='position:relative;left:30%;'><input type='text' style='width:500px'><button id='search' onClick='searchInCategory();'>Submit</button></div>
 	<br><br>
 	<div id='container'>

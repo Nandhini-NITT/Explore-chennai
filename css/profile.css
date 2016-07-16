@@ -66,9 +66,10 @@ border:1px solid black;
 #output{
     display: none;
 	width:300px;
+	float:right;
     position: relative;
     top: 0;
-    left: 60%;
+    left: -3%;
     right: 0;
     z-index: 10;
     padding: 0;

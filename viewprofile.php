@@ -69,13 +69,13 @@
   </form>
 
 </nav>
+<div  id="output">
+</div>
   <div id="img-holder">
 <?php
 include "connect.php";
 echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] ).'"/>';
 ?>
-</div>
-<div  id="output">
 </div>
 <div id='requests'></div>
 <div id="contents">
@@ -109,7 +109,7 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] )
 	<br>
 
 	<br><br><br><br>
-	<p style="position:absolute;bottom:0;left:25%;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
+	<p style="position:relative;bottom:0;left:25%;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
 </div>
 
 	<script>

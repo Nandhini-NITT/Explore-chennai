@@ -114,6 +114,8 @@ function getParameterByName(name, url) {
   </form>
 
 </nav>
+<div id='output'>
+</div>
 <span id='name'>Title</span>
 	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Review</button>
 	<span id='category'></span>
@@ -206,6 +208,8 @@ function getParameterByName(name, url) {
 				xhttp.open("GET", "updateReview.php", true);
 				xhttp.send();
 			}
+			
+			
 		</script>
 		</div>
         </div>
@@ -218,6 +222,18 @@ function getParameterByName(name, url) {
   </div>
 <script>
 var star;
+function findmatch(){
+		var search_text = document.getElementById('search').value;
+		document.getElementById("output").style.display="block";
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
+				document.getElementById("output").innerHTML = xmlhttp.responseText;
+			}
+		}
+		xmlhttp.open('GET','getuser.php?search_text='+search_text,true);
+		xmlhttp.send();
+	}
 	function add()
 	{
 		var anonymous=0;
