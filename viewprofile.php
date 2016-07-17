@@ -218,10 +218,12 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] )
 				{
 					var venueId=document.getElementById('venue'+control).innerHTML;
 					var url='https://api.foursquare.com/v2/venues/'+venueId+'?v=20150214&client_secret=T4YM5HKKRQCM1T1KQJPBMHDGPVTVBA1N3ID3NMCHIYNQDI2Q&client_id=10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
+					console.log(url);
 					$.ajax(url,{
 							complete:function(xmlhttp,status){
 							var oData=$.parseJSON(xmlhttp.responseText);
-							document.getElementById('venue'+pointer).innerHTML='<p>'+oData.response.venue.name+'</p>';
+							console.log(oData);
+							document.getElementById('venue'+pointer).innerHTML='<p><a href="viewVenue.php?id='+venueId+'">'+oData.response.venue.name+'</a></p>';
 							pointer++;
 							}
 							});

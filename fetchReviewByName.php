@@ -3,17 +3,17 @@ include "connect.php";
 session_start();
 $sql="Select * from user_reviews where user_id='".$_GET['id']."'";
 $query=$conn->query($sql);
-$control=0;
+$control=0;$pointer=0;
 while($control<$query->num_rows)
 {
 	$row=$query->fetch_assoc();
 	if($row['visibility']=="Public" && $row['Anonymous']==0)
-		echo "<div id='venue".$control."'>".$row['venue_id']."</div><li>".$row['user_id']."</li><li>".$row['Review']."</li>".insertStar($row['star']);
+		echo "<div id='venue".$pointer++."'>".$row['venue_id']."</div><li>".$row['Review']."</li>".insertStar($row['star']);
 	else if($row['visibility']=="Only Friends" && $row['Anonymous']==0)
 	{
 		if(checkFriendship())
 		{
-			echo "<div id='venue".$control."'>".$row['venue_id']."</div><li>".$row['user_id']."</li><li>".$row['Review']."</li>".insertStar($row['star']);
+			echo "<div id='venue".$pointer++."'>".$row['venue_id']."</div><li>".$row['Review']."</li>".insertStar($row['star']);
 		}
 	}
 	$control++;

@@ -25,14 +25,14 @@ function identifyAuthor($row)
 			echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>Your review</a>";
 		else if($name==$_SESSION['user'] && $row['Anonymous']==1)
 			echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>Your review(Posted as anonymous)</a>";
+		return;
 	}
-	else
-	{
-		if($row['Anonymous']==1)
-			echo "Anonymous";
-		else if($row['Anonymous']==0)
+	
+	if($row['Anonymous']==1)
+		echo "<li>Anonymous</li>";
+	else if($row['Anonymous']==0)
 			echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>".$name."</a>";
-	}
+	
 }
 function insertStar($star)
 {

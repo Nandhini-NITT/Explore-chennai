@@ -322,7 +322,7 @@ var param="";
 					$.ajax(url,{
 							complete:function(xmlhttp,status){
 							var oData=$.parseJSON(xmlhttp.responseText);
-							document.getElementById('venue'+pointer).innerHTML='<p>'+oData.response.venue.name+'</p>';
+							document.getElementById('venue'+pointer).innerHTML='<p><a href="viewVenue.php?id='+venueId+'">'+oData.response.venue.name+'</a></p>';
 							pointer++;
 							}
 							});

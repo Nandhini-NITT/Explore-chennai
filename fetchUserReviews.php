@@ -7,7 +7,7 @@ $control=0;
 while($control<$query->num_rows)
 {
 	$row=$query->fetch_assoc();
-	echo "<div id='venue".$control."'>".$row['venue_id']."</div><li>".$row['user_id']."</li><li>".$row['Review']."</li>".insertStar($row['star']).checkAnonymous($row)."<li style='float:right'>Audience: ".$row['visibility']."</li>";
+	echo "<div id='venue".$control."'>".$row['venue_id']."</div><li>".$row['Review']."</li>".insertStar($row['star']).checkAnonymous($row)."<li style='float:right'>Audience: ".$row['visibility']."</li>";
 	$control++;
 }
 function insertStar($star)
