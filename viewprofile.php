@@ -8,7 +8,8 @@
 	<link rel="stylesheet" type="text/css" href="css/profile.css">
 	<link href='https://fonts.googleapis.com/css?family=Lora:400,700italic' rel='stylesheet' type='text/css'>
 	</head>
-	<body><?php
+	<body>
+	<?php
 	session_start();
 	
 	if(!isset($_SESSION['user'])){
@@ -107,7 +108,15 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] )
 	
 	</table>
 	<br>
-
+	<hr>
+	<a href='#' onClick="$('#reviews').show();$('#ReviewLink').remove();load_review();return false;" id='ReviewLink'>Reviews submitted By <?php echo $_GET['username']; ?>&nbsp <span class='glyphicon glyphicon-chevron-down'></span></a>
+	<div id='reviews' style='display:none;'>
+		<div id='header'>
+			<h3>Reviews</h3>
+		</div>
+		<div id='ReviewBody'>
+		</div>
+	</div>
 	<br><br><br><br>
 	<p style="position:relative;bottom:0;left:25%;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
 </div>
@@ -147,6 +156,8 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] )
 			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
 				alert(xmlhttp.responseText);
 				updatebutton();
+				$('#ReviewBody').empty();
+				load_review();
 			}
 		}
 		xmlhttp.open('GET','removeFriend.php?id='+getParameterByName('username'),true);
@@ -196,8 +207,31 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] )
 		xmlhttp.open('GET','addFriend.php?id='+getParameterByName('username'),true);
 		xmlhttp.send();
 	}
-	
-		
+	function load_review()
+	{
+		var xmlhttp=new XMLHttpRequest();
+			xmlhttp.onreadystatechange=function(){
+			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
+				$('#ReviewBody').append(xmlhttp.responseText);
+				var control=0,pointer=0;
+				while(document.getElementById('venue'+control)!=null)
+				{
+					var venueId=document.getElementById('venue'+control).innerHTML;
+					var url='https://api.foursquare.com/v2/venues/'+venueId+'?v=20150214&client_secret=T4YM5HKKRQCM1T1KQJPBMHDGPVTVBA1N3ID3NMCHIYNQDI2Q&client_id=10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
+					$.ajax(url,{
+							complete:function(xmlhttp,status){
+							var oData=$.parseJSON(xmlhttp.responseText);
+							document.getElementById('venue'+pointer).innerHTML='<p>'+oData.response.venue.name+'</p>';
+							pointer++;
+							}
+							});
+					control++;
+				}
+			}
+		}
+		xmlhttp.open('GET','fetchReviewByName.php?id='+getParameterByName('username'),true);
+		xmlhttp.send();
+	}
 	</script>
 	</body>
 </html>
