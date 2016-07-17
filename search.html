@@ -1,13 +1,38 @@
 <html>
 <head>
 	<title>Search all places</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+	<link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<input type='text' id='query' onkeyup='search_suggest();'>
 	<div id='suggest'></div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Checkin</h4>
+      </div>
+      <div class="modal-body">
+        <span id='VenueName'></span>
+		<div id='map' style='height:300px;display:table;margin:0 auto;width:500px'>
+		</div>
+		<button class='btn btn-primary' onClick='addCheckin();'>Add Checkin</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 	<script>
 		function search_suggest()
 		{
@@ -24,12 +49,13 @@
 								oData=$.parseJSON(xHTTP.responseText);
 								console.log(oData);
 								$('#suggest li').remove();
-								for(i=0;i<5;i++)
+								var upperlimit=oData.response.minivenues.length<5?oData.response.minivenues.length:5;
+								for(i=0;i<upperlimit;i++)
 								{
 									if("address" in oData.response.minivenues[i].location)
-										$('#suggest').append('<li><a href="viewVenue.php?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+', Location:'+oData.response.minivenues[i].location.address+'</a></li>');
+										$('#suggest').append('<li><a href="viewVenue.php?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+', Location:'+oData.response.minivenues[i].location.address+'</a>&nbsp &nbsp<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onClick="Checkin('+i+');"><span class="glyphicon glyphicon-map-marker"></span>Add Checkin</button></li>');
 									else
-										$('#suggest').append('<li><a href="viewVenue.php?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+'</a></li>');
+										$('#suggest').append('<li><a href="viewVenue.php?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+'</a>&nbsp &nbsp<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onClick="Checkin('+i+');""><span class="glyphicon glyphicon-map-marker"></span>Add Checkin</button></li>');
 								}
 								if(i<oData.response.minivenues.length)
 								{
@@ -46,11 +72,36 @@
 			while(i<oData.response.minivenues.length)
 				{
 					if("address" in oData.response.minivenues[i].location)
-						$('#suggest').append('<li><a href="viewVenue.html?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+', Location:'+oData.response.minivenues[i].location.address+'</a></li>');
+						$('#suggest').append('<li><a href="viewVenue.html?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+', Location:'+oData.response.minivenues[i].location.address+'</a>&nbsp &nbsp<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onClick="Checkin('+i+');"><span class="glyphicon glyphicon-map-marker"></span>Add Checkin</button></li>');
 					else
-						$('#suggest').append('<li><a href="viewVenue.html?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+'</a></li>');
+						$('#suggest').append('<li><a href="viewVenue.html?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+'</a>&nbsp &nbsp<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onClick="Checkin('+i+');"><span class="glyphicon glyphicon-map-marker"></span>Add Checkin</button></li>');
 					i++;
 				}
+		}
+		L.mapbox.accessToken = 'pk.eyJ1IjoibmFuZGhpbmlkZXZpIiwiYSI6ImNpcWJ1bGQ1dTAwd21mbG0xZmg4bmZ2M3YifQ.RbOoXPJutCitMrH-tp6H7Q';
+		map = L.mapbox.map('map', 'mapbox.streets');
+		function Checkin(i)
+		{
+			var lat,lng,marker
+			$('#VenueName').html("<p id='name'>@ "+oData.response.minivenues[i].name+"</p><div id='venueId'>"+oData.response.minivenues[i].id+"</span>");
+			lat=oData.response.minivenues[i].location.lat;
+			lng=oData.response.minivenues[i].location.lng;
+			map.setView([lat,lng], 17)
+			marker = L.marker([lat, lng]).addTo(map);
+		}
+		function addCheckin()
+		{
+			var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+			alert(xhttp.responseText);
+			 $('#myModal').modal('hide');
+		}
+		};
+		var venueId=document.getElementById("venueId").innerHTML;
+		var venuename=document.getElementById('name').innerHTML;
+		xhttp.open("GET", "addCheckin.php?id="+venueId+"&name="+venuename, true);
+		xhttp.send();
 		}
 	</script>
 </body>

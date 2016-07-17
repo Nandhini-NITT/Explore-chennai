@@ -44,7 +44,7 @@
       <a class="nav-link" href="chennai.php">Home <span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Add checkin</a>
+      <a class="nav-link" href="search.html">Add checkin</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="profile.php">Your Profile</a>
