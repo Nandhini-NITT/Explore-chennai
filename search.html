@@ -27,9 +27,9 @@
 								for(i=0;i<5;i++)
 								{
 									if("address" in oData.response.minivenues[i].location)
-										$('#suggest').append('<li><a href="viewVenue.html?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+', Location:'+oData.response.minivenues[i].location.address+'</a></li>');
+										$('#suggest').append('<li><a href="viewVenue.php?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+', Location:'+oData.response.minivenues[i].location.address+'</a></li>');
 									else
-										$('#suggest').append('<li><a href="viewVenue.html?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+'</a></li>');
+										$('#suggest').append('<li><a href="viewVenue.php?id='+oData.response.minivenues[i].id+'">'+oData.response.minivenues[i].name+'</a></li>');
 								}
 								if(i<oData.response.minivenues.length)
 								{

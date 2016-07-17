@@ -12,7 +12,7 @@
 													});
 	</script>
 </head>
-<body>
+<body onLoad='load_review();'>
 	<?php 
 		global $row;
 		$row= new StdClass;
@@ -132,6 +132,14 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row->image ).'"
 	<br>
 		<button align="center" style="position:relative;left:25%" onclick="updatepassword();">Change Password</button>
 	<br>
+	<hr>
+	<div id='reviews'>
+		<div id='header'>
+			<h3>Reviews</h3>
+		</div>
+		<div id='ReviewBody'>
+		</div>
+	</div>
 	<br><br><br><br>
 	<p style="display:inline-block;text-align:center;position:relative;bottom:0;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
 </div>
@@ -298,6 +306,33 @@ var param="";
 			}
 		}
 		xmlhttp.open('GET','friends.php',true);
+		xmlhttp.send();
+	}
+	function load_review()
+	{
+		var xmlhttp=new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
+				$('#ReviewBody').append(xmlhttp.responseText);
+				var control=0,pointer=0;
+				while(document.getElementById('venue'+control)!=null)
+				{
+					var venueId=document.getElementById('venue'+control).innerHTML;
+					var url='https://api.foursquare.com/v2/venues/'+venueId+'?v=20150214&client_secret=T4YM5HKKRQCM1T1KQJPBMHDGPVTVBA1N3ID3NMCHIYNQDI2Q&client_id=10C4S0MMP2ZCTX3ACXKZ3YUSCGZXCOTXLTTOI2WVJ3WTIMH1';
+					$.ajax(url,{
+							complete:function(xmlhttp,status){
+							var oData=$.parseJSON(xmlhttp.responseText);
+							document.getElementById('venue'+pointer).innerHTML='<p>'+oData.response.venue.name+'</p>';
+							pointer++;
+							}
+							});
+					control++;
+				}
+				
+				
+			}
+		}
+		xmlhttp.open('GET','fetchUserReviews.php',true);
 		xmlhttp.send();
 	}
 </script>

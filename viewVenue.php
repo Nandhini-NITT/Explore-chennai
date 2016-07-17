@@ -220,7 +220,9 @@ function getParameterByName(name, url) {
       
     </div>
   </div>
-<script>
+<p style="position:relative;bottom:0;left:45%;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
+
+  <script>
 var star;
 function findmatch(){
 		var search_text = document.getElementById('search').value;

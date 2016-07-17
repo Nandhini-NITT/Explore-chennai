@@ -74,6 +74,7 @@ top:1rem;
 		</tbody>
 		</table>
 	</div>
-	
+
+<p style="position:relative;bottom:0;left:45%;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
 </body>
 </html>
