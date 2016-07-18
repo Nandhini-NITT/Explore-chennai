@@ -12,7 +12,7 @@
 													});
 	</script>
 </head>
-<body onLoad='load_review();'>
+<body onLoad='load_review();showCheckins();'>
 	<?php 
 		global $row;
 		$row= new StdClass;
@@ -140,6 +140,13 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row->image ).'"
 		<div id='ReviewBody'>
 		</div>
 	</div>
+	<div id='checkin'>
+		<div id='checkinHeader'>
+			<h3>Checkins</h3>
+		</div>
+		<div id='checkinBody'>
+		</div>
+	</div>
 	<br><br><br><br>
 	<p style="display:inline-block;text-align:center;position:relative;bottom:0;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
 </div>
@@ -160,6 +167,18 @@ var param="";
 		xmlhttp.open('GET','getrequest.php',true);
 		xmlhttp.send();
 	}
+	function showCheckins()
+	{
+		var xmlhttp=new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
+				$('#checkinBody').append(xmlhttp.responseText);
+			}
+			}
+		xmlhttp.open('GET','viewUserCheckins.php',true);
+		xmlhttp.send();
+	}
+				
 	function findmatch(){
 		var search_text = document.getElementById('search').value;
 		document.getElementById("output").style.display="block";
