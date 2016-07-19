@@ -11,22 +11,21 @@
 	<body>
 	<?php
 	session_start();
-	
-	if(!isset($_SESSION['user'])){
-		header('Location:chennai.php');
-	}
-	if(empty($_GET['username'])||$_GET['username']==$_SESSION['user']){
-		header('Location:profile.php');
-	}
-	$user = $_GET['username'];
-	include('connect.php');
-	$sql = "SELECT username,name,email,phno,gender,Image from users where username like'".$user."%'";
+	if(isset($_SESSION['user'])==1)
+	{
+		if(empty($_GET['username'])||$_GET['username']==$_SESSION['user']){
+			header('Location:profile.php');
+		}
+		$user = $_GET['username'];
+		include('connect.php');
+		$sql = "SELECT username,name,email,phno,gender,Image from users where username like'".$user."%'";
 		$result = $conn->query($sql);
-	if ($result->num_rows == 1) {
-		$row1= $result->fetch_assoc();
-	}
-	else{
+		if ($result->num_rows == 1) {
+			$row1= $result->fetch_assoc();
+		}
+		else{
 		header('Location:profile.php');
+		}
 	}
 	
 ?>

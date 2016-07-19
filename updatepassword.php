@@ -1,8 +1,8 @@
 <?php
 include "connect.php";
 session_start();
-if(!isset($_SESSION)==1)
-	header("Location: index.php");
+if(!isset($_SESSION['user']))
+	header("Location: chennai.php");
 $oldpass=SHA1($_POST['oldpass']);
 $pass1="";
 $error=0;

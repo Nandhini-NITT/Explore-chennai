@@ -1,17 +1,20 @@
 <?php
 include "connect.php";
 session_start();
-if('name' in $_GET)
+if(isset($_SESSION['user'])==1)
 {
-	$name=$_SESSION['user'];
-	viewCheckin($name);
-}
-else
-{
-	$name=$_GET['name'];
-	if(checkFriendship())
+	if('name' in $_GET)
 	{
+		$name=$_SESSION['user'];
 		viewCheckin($name);
+	}
+	else
+	{
+		$name=$_GET['name'];
+		if(checkFriendship())
+		{
+			viewCheckin($name);
+		}
 	}
 }
 function viewCheckin($name)

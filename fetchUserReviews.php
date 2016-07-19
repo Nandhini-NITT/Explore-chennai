@@ -1,14 +1,19 @@
 <?php
 include "connect.php";
 session_start();
-$sql="Select * from user_reviews where user_id='".$_SESSION['user']."'";
-$query=$conn->query($sql);
-$control=0;
-while($control<$query->num_rows)
+if(!isset($_SESSION['user']))
+	header("Location:chennai.php");
+else
 {
-	$row=$query->fetch_assoc();
-	echo "<div id='venue".$control."'>".$row['venue_id']."</div><li>".$row['Review']."</li>".insertStar($row['star']).checkAnonymous($row)."<li style='float:right'>Audience: ".$row['visibility']."</li>";
-	$control++;
+	$sql="Select * from user_reviews where user_id='".$_SESSION['user']."'";
+	$query=$conn->query($sql);
+	$control=0;
+	while($control<$query->num_rows)
+	{
+		$row=$query->fetch_assoc();
+		echo "<div id='venue".$control."'>".$row['venue_id']."</div><li>".$row['Review']."</li>".insertStar($row['star']).checkAnonymous($row)."<li style='float:right'>Audience: ".$row['visibility']."</li>";
+		$control++;
+	}
 }
 function insertStar($star)
 {
