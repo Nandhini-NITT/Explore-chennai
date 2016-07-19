@@ -41,7 +41,7 @@ if(isset($_SESSION['user'])==1)
 		}	
 	}
 ?>
-<div id='signin'>
+<div id='signin' style='display:table;margin:0 auto'>
 <form action="" method="post" style="float:right;top:20%;position:relative" id="signin">
 		<h1 align="center">SIGNIN</h1>
 		Username or Phone number:
