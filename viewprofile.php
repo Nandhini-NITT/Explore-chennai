@@ -117,6 +117,14 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] )
 		<div id='ReviewBody'>
 		</div>
 	</div>
+	<a href='#' onClick="$('#checkins').show();$('#CheckinLink').remove();load_checkins();return false;" id='CheckinLink'>Reviews submitted By <?php echo $_GET['username']; ?>&nbsp <span class='glyphicon glyphicon-chevron-down'></span></a>
+	<div id='checkins' style='display:none;'>
+		<div id='header'>
+			<h3>Checkin</h3>
+		</div>
+		<div id='CheckinBody'>
+		</div>
+	</div>
 	<br><br><br><br>
 	<p style="position:relative;bottom:0;left:25%;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
 </div>
@@ -234,6 +242,18 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] )
 		xmlhttp.open('GET','fetchReviewByName.php?id='+getParameterByName('username'),true);
 		xmlhttp.send();
 	}
+	function load_checkin()
+	{
+		var xmlhttp=new XMLHttpRequest();
+			xmlhttp.onreadystatechange=function(){
+			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
+				$('#CheckinBody').append(xmlhttp.responseText);
+			}
+		}
+		xmlhttp.open('GET','viewUserCheckins.php?name='+getParameterByName('username'),true);
+		xmlhttp.send();
+	}
+
 	</script>
 	</body>
 </html>
