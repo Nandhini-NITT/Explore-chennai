@@ -3,7 +3,9 @@
 	include "connect.php";
 	session_start();
 	if(!isset($_SESSION['user']))
-		header("Location:chennai.php");
+	{
+	?><script>alert("Kindly login");</script><?php
+	}
 	else
 	{
 		$row;

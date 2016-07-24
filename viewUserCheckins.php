@@ -3,7 +3,8 @@ include "connect.php";
 session_start();
 if(isset($_SESSION['user'])==1)
 {
-	if('name' in $_GET)
+	
+	if(!isset($_GET['name']))
 	{
 		$name=$_SESSION['user'];
 		viewCheckin($name);
@@ -20,6 +21,7 @@ if(isset($_SESSION['user'])==1)
 function viewCheckin($name)
 {		
 	$sql="Select * from checkins where user_id='".$name."'";
+	include "connect.php";
 	$query=$conn->query($sql);
 	if($query->num_rows==0)
 		echo "No checkins added";

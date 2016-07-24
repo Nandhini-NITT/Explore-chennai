@@ -22,7 +22,7 @@ function addRowHandlers()
 	{
 		rows[i].onclick = function(){ return function(){
 		var id = this.cells[3].innerHTML;
-		window.location='viewVenue.html?id='+id;
+		window.location='viewVenue.php?id='+id;
 		};
 		}(rows[i]);
 	}

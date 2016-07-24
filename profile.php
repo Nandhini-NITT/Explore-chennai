@@ -25,7 +25,10 @@
 		$row->name="";
 		session_start();
 		if(!isset($_SESSION['user']))
-			header('Location:chennai.php');
+		{
+			?><script>alert("Kindly login to continue");</script><?php
+			header("Location:login.php");
+		}
 		else
 		{
 		include "connect.php";
@@ -320,7 +323,6 @@ var param="";
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function(){
 			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
-				
 				$("#friends").append(xmlhttp.responseText);
 			}
 		}

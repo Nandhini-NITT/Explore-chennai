@@ -1,7 +1,7 @@
 <?php
 include "connect.php";
 session_start();
-if(!isser($_SESSION['user']))
+if(!isset($_SESSION['user']))
 	header("Location:chennai.php");
 else
 {

@@ -4,9 +4,9 @@ $venue_name=$_GET['name'];
 $current_date = date("d-m-y");
 include "connect.php";
 session_start();
-if(!isset($_SESSION['user'])
+if(!isset($_SESSION['user']))
 {
-	?><script>alert("Please Log in to continue");</script><?php
+	echo "Please Log in to continue";
 }
 else
 {

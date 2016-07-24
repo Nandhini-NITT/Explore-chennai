@@ -21,11 +21,9 @@ span {
 display:table;
 margin:0 auto;
 }
-#login{
-display:none;
-}
+
 div#frame {
-   background-color:burlywood;
+   background-color:aliceblue;
     position:absolute;
 	top:35%;
 	left:50%;
@@ -135,4 +133,8 @@ top:1rem;
     -ms-box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
     -o-box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px rgba(0, 0, 0, 0.08);
+}
+#dp{
+height:300px;
+width:300px;
 }

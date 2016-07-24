@@ -7,9 +7,9 @@ $control=0;$pointer=0;
 while($control<$query->num_rows)
 {
 	$row=$query->fetch_assoc();
-	if($row['visibility']=="Public" && $row['Anonymous']==0)
+	if($row['visibility']=="Public")
 		echo "<div id='venue".$pointer++."'>".$row['venue_id']."</div><li>".$row['Review']."</li>".insertStar($row['star']);
-	else if($row['visibility']=="Only Friends" && $row['Anonymous']==0)
+	else if($row['visibility']=="Only Friends")
 	{
 		if(checkFriendship())
 		{

@@ -30,24 +30,12 @@ function getParameterByName(name, url) {
 	include "connect.php";
 	if(isset($_SESSION['user'])==1)
 	{
-		?><style>#login{display:none;}#addReview{display:block;}</style><?php
-		$reviews=" ";
-			$sql="Select * from user_reviews where user_id='".$_SESSION['user']."' and venue_id='".$_GET['id']."' ";
-			$stmt=$conn->query($sql);
-			if($stmt->num_rows==0){
-			?><style>#addReview{display:block;}#view{display:none;}</style><?php
-			}
-			else{
-				$row1= $stmt->fetch_assoc();
-				?><style>#addReview{display:none;}#view{display:block;}</style>
-					 <?php
-			}
-			
-	}
+		?><style>#login{display:none;}</style><?php
+}
 	else
 	{	
 		$flag=0;
-		?><style>#login{display:block;}#addReview{display:none;}</style><?php
+		?><style>#login{display:block;}</style><?php
 		if($_SERVER['REQUEST_METHOD']=="POST" )
 		{
 			include "connect.php";
@@ -81,7 +69,7 @@ function getParameterByName(name, url) {
       <a class="nav-link" href="chennai.php">Home <span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Add checkin</a>
+      <a class="nav-link" href="search.html">Add checkin</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="profile.php">Your Profile</a>
@@ -116,57 +104,33 @@ function getParameterByName(name, url) {
 </nav>
 <div id='output'>
 </div>
+<div id='contents'>
 <span id='name'>Title</span>
-	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Review</button>
+	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Signin</button>
 	<span id='category'></span>
 	<span id='categoryIcon'></span>
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
 		<ol class="carousel-indicators">
 		</ol>
-	<div class="carousel-inner" role="listbox">
-     </div>
+		<div class="carousel-inner" role="listbox">
+		</div>
 	  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
       <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+		</a>
 	</div>
 	<br>
 	<p style='display:table;margin:0 auto'>Click on the marker to know the address of location</p>
 	<div id='map' style='height:300px;display:table;margin:0 auto;width:500px'>
 	</div>
-<div id='frame'>
+<div id='frame' style='overflow-y:auto'>
 <p>Reviews from users</p>
-	</div>
-<!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Review</h4>
-        </div>
-        <div class="modal-body">
-		  <div id='login'>
-			<form action="" method="post"  id="signin">
-				<h1 align="center">SIGNIN</h1>
-				Username or Phone number:
-				<input type="text" name="uname">
-				<br>Password:
-				<input type="password" name="password">
-			<br>
-			<button type="submit" name="submit" value="Submit">Submit</button>
-			<br>
-			Not registered yet?? <a href='adduser.php'>Signup</a>
-			</form>
-		  </div>
-		  <div id='addReview'>
+<div id='addReview'>
 		  <textarea rows='4' cols='50' id='review' required>
 			</textarea>
 			<br>
@@ -174,56 +138,103 @@ function getParameterByName(name, url) {
 				<option>Public</option>
 				<option>Only Friends</option>
 			</select>
-			Post as Anonymous:<input type='checkbox' value="Anonymous" id='anonymous'>
+			Post as Anonymous &nbsp <input type='checkbox' value="Anonymous" id='anonymous'>
 			<br>
-			<button class='btn btn-primary' onClick='add();' type='submit'>Submit</button>
 			<br>
-		</div>
+			<?php if(!isset($_SESSION['user'])){
+				?><style>#visibility{display:none;}#anonymous{display:none;}</style><?php 
+				}
+				?>
+				<button class='btn btn-primary' onClick='add();' >Submit</button>
+			</div>
 		<br>
-		<div id='view'>
-		Your Review about the place <br>
-		<?php echo $row1["Review"];echo "<div id='star' style='display:-webkit-inline-box'><br></div><button class='btn btn-primry' onClick='update();'>Edit</button>"; ?>
-		<script>
-			$('.modal-title').text("View Review");
+	</div>
+	<!--<div class="modal fade" id="confirm" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Confirm</h4>
+        </div>
+        <div class="modal-body">
+		<p>Your review will be posted as anonymous.Do you want to continue.</p>
+		<button class='btn btn-primary'>Yes</button>
+		<button class='btn btn-danger' onClick='function(){>No</button>-->
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Signin</h4>
+        </div>
+        <div class="modal-body">
+		  <div id='login'>
+			<form action="" method="post"  id="signin">
+				SIGNIN<br>
+				Username or Phone number:
+				<input type="text" name="uname">
+				<br>
+				Password:
+					<input type="password" name="password">
+				<button type="submit" name="submit" value="Submit" type='submit'>Submit</button>
+			Not registered yet?? <a href='adduser.php'>Signup</a>
+			<p>or</p>
+			</form>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>
+  <div id='requests' style='display:table;margin:0 auto'></div>
+<div id='friends'></div>
+  <script>
+		
+			/*$('.modal-title').text("View Review");
+			var stars=function(){
 			var el = document.querySelector('#star');
 			var currentRating = 0;
+			if($row1!==undefined)
+			{
 			var star=<?php echo $row1["star"]; ?>;
-			var stars=function(){
 			for(var i=0;i<star;i++)
 			{
 				$('#star').append("<span style='color:gold;size:40%;display:inline-block;font-size:30px'>&#9733;</span>");
 			}
-			};
-			var displayStar=new stars();
-			function update()
-			{
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
-				if (xhttp.readyState == 4 && xhttp.status == 200) {
-					alert(xhttp.responseText);
-					$('#view').hide();
-					$('#addReview').show();
-					}
-				};
-				xhttp.open("GET", "updateReview.php", true);
-				xhttp.send();
 			}
+			};
 			
+			var displayStar=new stars();*/
+		function display_Friends()
+	{
+		$('#friends').empty();
+		$('#contents').hide();
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
+				
+				$("#friends").append(xmlhttp.responseText);
+			}
+		}
+		xmlhttp.open('GET','friends.php',true);
+		xmlhttp.send();
+	}
+	function viewRequest()
+	{
+		$('#contents').hide();
+		$('#img-holder').hide();
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4 &&  xmlhttp.status == 200){
+				$("#requests").append(xmlhttp.responseText);
+			}
+		}
+		xmlhttp.open('GET','getrequest.php',true);
+		xmlhttp.send();
+	}
 			
-		</script>
-		</div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-<p style="position:relative;bottom:0;left:45%;font-size:15px">Made with <span style="font-size:150%;color:red;">&hearts;</span> by Nandhini</p>
-
-  <script>
-var star;
 function findmatch(){
 		var search_text = document.getElementById('search').value;
 		document.getElementById("output").style.display="block";
@@ -236,11 +247,28 @@ function findmatch(){
 		xmlhttp.open('GET','getuser.php?search_text='+search_text,true);
 		xmlhttp.send();
 	}
+	var star;
 	function add()
 	{
-		var anonymous=0;
-		if(document.getElementById("anonymous").checked)
-			anonymous=1;
+		var anonymous,visibility;
+		var usercheck='<?php if(isset($_SESSION['user'])) echo "1"; else echo "0"; ?>';
+		if (usercheck==0)
+		{
+			if(confirm("The review will be posted as anonymous.Do you want to continue?"))
+				name='anonymous';
+			else
+			{
+				$('#myModal').modal('show');
+				return;
+			}
+		}
+		else
+		{
+			if(document.getElementById("anonymous").checked)
+				anonymous=1;
+			else
+				anonymous=0;
+		}
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -249,8 +277,14 @@ function findmatch(){
 		location.reload();
 		}
 		};
-		
-		xhttp.open("GET", "addReview.php?id="+getParameterByName('id')+"&anonymous="+anonymous+"&visibility="+document.getElementById("visibility").value+"&stars="+star+"&review="+document.getElementById('review').value, true);
+		if(document.getElementById("visibility").style.display=='none')
+			visibility="Public";
+		else
+			visibility=document.getElementById("visibility").value;
+		if(name==="anonymous" || anonymous==1)
+			xhttp.open("GET","addAnonymousReview.php?id="+getParameterByName('id')+"&stars="+star+"&review="+document.getElementById('review').value, true)
+		else
+			xhttp.open("GET", "addReview.php?id="+getParameterByName('id')+"&visibility="+visibility+"&stars="+star+"&review="+document.getElementById('review').value, true);
 		xhttp.send();
 	}
 	var el = document.querySelector('#addReview');

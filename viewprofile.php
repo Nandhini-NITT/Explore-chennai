@@ -116,7 +116,7 @@ echo '<img id="dp" src="data:image/jpeg;base64,'.base64_encode( $row1['Image'] )
 		<div id='ReviewBody'>
 		</div>
 	</div>
-	<a href='#' onClick="$('#checkins').show();$('#CheckinLink').remove();load_checkins();return false;" id='CheckinLink'>Reviews submitted By <?php echo $_GET['username']; ?>&nbsp <span class='glyphicon glyphicon-chevron-down'></span></a>
+	<a href='#' onClick="$('#checkins').show();$('#CheckinLink').remove();load_checkins();return false;" id='CheckinLink'>Checkins By <?php echo $_GET['username']; ?>&nbsp <span class='glyphicon glyphicon-chevron-down'></span></a>
 	<div id='checkins' style='display:none;'>
 		<div id='header'>
 			<h3>Checkin</h3>

@@ -22,7 +22,7 @@
 			echo  "Invalid email format";
 		else if(empty($_POST["phno"]))
 			echo "Phone Number is required";
-		else if(preg_match("/^[1-9][0-9]{5,10}$/",$phno))
+		else if(!preg_match("/^[1-9][0-9]{5,10}$/",$phno))
 			echo "Invalid Phone number";
 		if(!isset($_FILES['userfile']))
 		{
@@ -51,7 +51,12 @@
 			}
 		}
 		else
-			$Error="The emailid/password/Username is already registered";
+		{
+			?>
+			<script>alert("The emailid/password/Username is already registered");</script>
+			<?php
+			header('Location:adduser.php');
+		}
 			
 	
 	}

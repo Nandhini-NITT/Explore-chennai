@@ -2,7 +2,9 @@
 include "connect.php";
 session_start();
 if(!isset($_SESSION['user']))
-	header("Location:chennai.php");
+	{
+	?><script>alert("Kindly login");</script><?php
+	}
 else
 {
 	$sql="Select sender from friendrequest_tray where receiver='".$_SESSION['user']."'";

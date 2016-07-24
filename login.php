@@ -31,8 +31,7 @@ if(isset($_SESSION['user'])==1)
 				{
 					$flag=1;
 					$_SESSION["user"]=$name;
-					echo $_SESSION['user'];
-					header('Location:profile.php');
+					header("location:profile.php");
 				}
 			}
 		if($flag==0){

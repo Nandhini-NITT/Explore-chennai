@@ -16,21 +16,30 @@ if($query==true)
 		$control++;
 	}
 }
+$sql1="Select * from anonymoususer where venue_id='".$venue."'";
+$query1=$conn->query($sql1);
+if($query1->num_rows>0)
+{
+	$control=0;
+	while($control<$conn->affected_rows)
+	{
+		$row1=$query1->fetch_assoc();
+		echo "<li>".$row1['user_id']."</li><li>".$row1['Review']."</li>".insertStar($row1['star']);
+		$control++;
+	}
+}
 function identifyAuthor($row)
 {
 	$name=$row['user_id'];
 	if(isset($_SESSION['user']))
 	{
 		if($name==$_SESSION['user'])
+			{
 			echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>Your review</a>";
-		else if($name==$_SESSION['user'] && $row['Anonymous']==1)
-			echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>Your review(Posted as anonymous)</a>";
-		return;
+			return;
+			}
 	}
 	
-	if($row['Anonymous']==1)
-		echo "<li>Anonymous</li>";
-	else if($row['Anonymous']==0)
 			echo "<a role='menuitem' tabindex='-1' href='viewprofile.php?username=".$name."'>".$name."</a>";
 	
 }
@@ -47,7 +56,7 @@ function checkaccess($row)
 {
 	if($row['visibility']==="Public")
 		return true;
-	else if($row['visibility']=="Only Friends")
+	else if($row['visibility']=="Only Friends" && isset($_SESSION['user']))
 	{
 		if($row['user_id']==$_SESSION['user'])
 			return true;
@@ -57,7 +66,8 @@ function checkaccess($row)
 		$stmt=$conn->query($sql);
 		if($stmt->num_rows==0)
 			return false;
-			
+		else
+			return true;
 	}
 }
 ?>

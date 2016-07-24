@@ -12,36 +12,36 @@ function validateForm()
 		var reupper=/[A-Z]/;
 		var regex_symbols= /[-!$%^&*()_+|~=`{}[]:/;
 		var error=0;
-		if(!name.match(letternumber))
+		/*if(!name.match(letternumber))
 		{
 			alert("Username can contain only letters and numbers");
 			error=1;
 			document.forms["fields"]["uname"].focus();
-		}
-		else if(!(/^[A-Za-z\s]+$/.test(fullname)))
+		}*/
+		/*else if(!(/^[A-Za-z\s]+$/.test(fullname)))
 		{
 			alert("Name can only contain letters and spaces");
 			error=1;
 			document.forms["fields"]["name"].focus();
-		}
-		else if(name.length<5 || name.length>15)
+		}*/
+		/*else if(name.length<5 || name.length>15)
 		{
 			alert("Username must contain 5-15 characters");
 			error=1;
 			document.forms["fields"]["uname"].focus();
-		}
-		else if(phno.length<8)
+		}*/
+		/*else if(phno.length<8)
 		{
 			alert("Enter valid phone number");
 			error=1;
 			document.forms["fields"]["phno"].focus();
-		}
-		else if(gender!="M" && gender!="F")
+		}*/
+		/*else if(gender!="M" && gender!="F")
 		{
 			alert("Gender has to be M or F");
 			error=1;
 			document.forms["fields"]["gender"].focus();
-		}
+		}*/
 		else if(password.length<5)
 		{
 			alert("Password must contain atleast 5 characters");
